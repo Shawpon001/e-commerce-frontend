@@ -188,14 +188,66 @@ const Navbar = () => {
                     className="menu menu-sm dropdown-content bg-[#edf9ffe8] rounded-box z-1 mt-3 w-52 p-2 shadow right-0 text-sm font-semibold"
                   >
 
-                    <li>
-                      <a
-                        className="flex rounded-md bg-teal-600 px-2 md:px-5 py-2 md:py-2.5 text-sm font-medium text-white shadow"
-                        href="#"
-                      >
-                        Sign In
-                      </a>
-                    </li>
+<li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-teal-600 font-serif uppercase nav-link font-semibold block text-[15px]"
+                        : "hover:text-[#ac99f1e1] text-gray-700 font-serif uppercase nav-link font-semibold block text-[15px]"
+                    }
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
+                  <NavLink
+                    to="/login"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-teal-600  font-serif uppercase nav-link font-semibold block text-[15px]"
+                        : "hover:text-[#ac99f1e1] text-gray-700 font-serif uppercase nav-link font-semibold block text-[15px]"
+                    }
+                  >
+                    Products
+                  </NavLink>
+                </li>
+                <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
+                  <NavLink
+                    to="/about"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-teal-600  font-serif uppercase nav-link font-semibold block text-[15px]"
+                        : "hover:text-[#ac99f1e1] text-gray-700 font-serif uppercase nav-link font-semibold block text-[15px]"
+                    }
+                  >
+                    About
+                  </NavLink>
+                </li>
+                <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
+                  <NavLink
+                    to="/about"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-teal-600  font-serif uppercase nav-link font-semibold block text-[15px]"
+                        : "hover:text-[#ac99f1e1] text-gray-700 font-serif uppercase nav-link font-semibold block text-[15px]"
+                    }
+                  >
+                    BLoge
+                  </NavLink>
+                </li>
+                <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
+                  <NavLink
+                    to="/about"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-teal-600  font-serif uppercase nav-link font-semibold block text-[15px]"
+                        : "hover:text-[#ac99f1e1] text-gray-700 font-serif uppercase nav-link font-semibold block text-[15px]"
+                    }
+                  >
+                    Contact
+                  </NavLink>
+                </li>
                     
                   </ul>
                 </div>
@@ -230,6 +282,42 @@ const Navbar = () => {
                     }
                   >
                     Products
+                  </NavLink>
+                </li>
+                <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
+                  <NavLink
+                    to="/about"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-teal-600  font-serif uppercase nav-link font-semibold block text-[15px]"
+                        : "hover:text-[#ac99f1e1] text-gray-700 font-serif uppercase nav-link font-semibold block text-[15px]"
+                    }
+                  >
+                    About
+                  </NavLink>
+                </li>
+                <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
+                  <NavLink
+                    to="/about"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-teal-600  font-serif uppercase nav-link font-semibold block text-[15px]"
+                        : "hover:text-[#ac99f1e1] text-gray-700 font-serif uppercase nav-link font-semibold block text-[15px]"
+                    }
+                  >
+                    BLoge
+                  </NavLink>
+                </li>
+                <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
+                  <NavLink
+                    to="/about"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-teal-600  font-serif uppercase nav-link font-semibold block text-[15px]"
+                        : "hover:text-[#ac99f1e1] text-gray-700 font-serif uppercase nav-link font-semibold block text-[15px]"
+                    }
+                  >
+                    Contact
                   </NavLink>
                 </li>
               </ul>
