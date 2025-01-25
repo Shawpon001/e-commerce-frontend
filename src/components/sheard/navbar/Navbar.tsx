@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <header className="bg-gray-200">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="md:flex md:items-center md:gap-12">
-            <a className="block text-teal-600" href="#">
+            <a className="block text-teal-600">
               <img
                 src="https://i.ibb.co.com/VmX711W/images-removebg-preview.png"
                 alt=""
@@ -18,7 +20,7 @@ const Navbar = () => {
                 <li>
                   <a
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
+                   
                   >
                     Home
                   </a>
@@ -27,7 +29,7 @@ const Navbar = () => {
                 <li>
                   <a
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
+                   
                   >
                     Products
                   </a>
@@ -36,7 +38,7 @@ const Navbar = () => {
                 <li>
                   <a
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
+                   
                   >
                     About
                   </a>
@@ -45,7 +47,7 @@ const Navbar = () => {
                 <li>
                   <a
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
+                   
                   >
                     Contact
                   </a>
@@ -56,12 +58,12 @@ const Navbar = () => {
 
           <div className="flex items-center gap-4">
             <div className="sm:flex sm:gap-4">
-              <a
+              <Link to="/login"
                 className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
-                href="#"
+               
               >
                 Login
-              </a>
+              </Link>
             </div>
 
             <div className="block md:hidden">
