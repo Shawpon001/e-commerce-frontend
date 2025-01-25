@@ -7,9 +7,9 @@ import BookCatagory from './catagory/BookCatagory';
 
 const Home = () => {
     return (
-        <div>
+        <div className='bg-gray-100'>
             <Banner/>
-           <div className=' lg:px-10 md:px-5 px-2'>
+           <div className=' lg:px-10  md:px-5 px-2'>
            {/* <BookCatagory/> */}
             <PopularBooks/>
             <Discount/>

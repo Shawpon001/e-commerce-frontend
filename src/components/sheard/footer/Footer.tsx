@@ -1,15 +1,15 @@
 const Footer = () => {
   return (
-    <div className="mt-10">
-      <footer className="bg-[#292929] text-white">
+    <div className="mt-10 ">
+      <footer className="bg-gray-200">
         <div className="mx-auto max-w-screen-xl space-y-8 px-2 py-10 sm:px-6 lg:space-y-16 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 text-[#b3b7c0] pl-6">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 text-[#050505] pl-6">
             <div>
-              <div className="text-white">
+              <div className="">
                 <img src="https://i.ibb.co.com/VmX711W/images-removebg-preview.png" alt="Bookistry" className="h-[80px] w-36 object-cover " />
               </div>
 
-              <p className="mt-2 max-w-xs text-[#9aa5bb]">
+              <p className="mt-2 max-w-xs text-[#000000]">
                 Connecting readers with stories since 2024. Explore our curated collection of new and used books. Where every page holds a new adventure.
               </p>
 
@@ -111,79 +111,79 @@ const Footer = () => {
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
               <div>
-                <p className="font-medium text-white">NEED HELP</p>
+                <p className="font-medium ">NEED HELP</p>
 
                 <ul className="mt-6 space-y-4 text-sm">
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75">+880 1800122288</a>
+                    <a href="#" className=" transition hover:opacity-75">+880 1800122288</a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75"> bookistry@gmail.com </a>
+                    <a href="#" className=" transition hover:opacity-75"> bookistry@gmail.com </a>
                   </li>
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75">2nd Floor Rifat Tower Tejgaon, Dhaka</a>
+                    <a href="#" className=" transition hover:opacity-75">2nd Floor Rifat Tower Tejgaon, Dhaka</a>
                   </li>
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75">Saturday - Thusday : 9:00 AM - 8:00 PM </a>
+                    <a href="#" className=" transition hover:opacity-75">Saturday - Thusday : 9:00 AM - 8:00 PM </a>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <p className="font-medium text-white">SERVICES</p>
+                <p className="font-medium ">SERVICES</p>
 
                 <ul className="mt-6 space-y-4 text-sm">
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75"> Branding </a>
+                    <a href="#" className=" transition hover:opacity-75"> Branding </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75"> Design </a>
+                    <a href="#" className=" transition hover:opacity-75"> Design </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75"> Advertisemnet </a>
+                    <a href="#" className=" transition hover:opacity-75"> Advertisemnet </a>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <p className="font-medium text-white">Company</p>
+                <p className="font-medium ">Company</p>
 
                 <ul className="mt-6 space-y-4 text-sm">
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75"> About </a>
+                    <a href="#" className=" transition hover:opacity-75"> About </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75"> Contact </a>
+                    <a href="#" className=" transition hover:opacity-75"> Contact </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75"> Jobs </a>
+                    <a href="#" className=" transition hover:opacity-75"> Jobs </a>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <p className="font-medium text-white">Legal</p>
+                <p className="font-medium ">Legal</p>
 
                 <ul className="mt-6 space-y-4 text-sm">
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75"> Terms of use </a>
+                    <a href="#" className=" transition hover:opacity-75"> Terms of use </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75"> Returns Policy </a>
+                    <a href="#" className=" transition hover:opacity-75"> Returns Policy </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75"> Refund Policy </a>
+                    <a href="#" className=" transition hover:opacity-75"> Refund Policy </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-[#9aa5bb] transition hover:opacity-75"> Cookie Policy </a>
+                    <a href="#" className=" transition hover:opacity-75"> Cookie Policy </a>
                   </li>
                 </ul>
               </div>
@@ -191,7 +191,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-gray-200 pt-6">
-          <p className="text-sm text-[#9aa5b8] font-semibold  px-16 pb-6">Copyright &copy; 2025 <a href="#" className=" text-[#80391d] font-bold hover:underline">Bookistry</a> - All rights reserved.</p>
+          <p className="text-sm  font-semibold  px-16 pb-6">Copyright &copy; 2025 <a href="#" className=" text-[#80391d] font-bold hover:underline">Bookistry</a> - All rights reserved.</p>
         </div>
       </footer>
 

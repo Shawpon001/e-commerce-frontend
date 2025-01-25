@@ -1,17 +1,17 @@
 import { CiSearch } from "react-icons/ci";
 import { FaCartShopping } from "react-icons/fa6";
 import { IoMenuSharp } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import SubNavbar from "./SubNavbar";
 const Navbar = () => {
   return (
     <header className="bg-gray-200">
       <SubNavbar/>
       {/* main nav  */}
-      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto  max-w-screen-xl  px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="md:flex md:items-center md:gap-12">
-            <a className="block text-teal-600" href="#">
+            <a className="block text-teal-600" href="/">
               <img
                 src="https://i.ibb.co.com/VmX711W/images-removebg-preview.png"
                 alt=""
@@ -58,12 +58,12 @@ const Navbar = () => {
                   </div>
                 </form>
               </div>
-              <a
+              <Link to="/login"
                 className="hidden lg:flex rounded-md bg-teal-600 px-2 md:px-5 py-2 md:py-2.5 text-sm font-medium text-white shadow"
-                href="#"
+                
               >
                 Sign In
-              </a>
+              </Link>
               <a href="#" className="hidden lg:flex">
                 <FaCartShopping className="h-6 w-6 text-gray-500 hover:text-gray-700" />
               </a>
@@ -153,7 +153,7 @@ const Navbar = () => {
         </div>
         {/* bottom nav */}
         <div>
-          <div className="hidden md:flex md:items-center justify-center py-4 md:items-center">
+          <div className="hidden md:flex md:items-center justify-center  py-4 md:items-center">
             <nav aria-label="Global">
               <ul className="flex items-center gap-6 text-sm shrink-0 font-semibold">
                 <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
