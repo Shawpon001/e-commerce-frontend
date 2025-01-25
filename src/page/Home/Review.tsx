@@ -55,8 +55,8 @@ function Feedback() {
 
   return (
     <div className="slider-container mb-10 mt-3 xl:px-20 md:px-5 px-2">
-      <h2 className="text-center mt-8 mb-5 font-serif text-3xl text-green-500">
-        Student Feedback
+      <h2 className="text-center mt-8 mb-5 font-serif text-3xl ">
+        Our Clint Feedback
       </h2>
       <Slider ref={(slider) => (sliderRef = slider)} {...settings}>
         {student.map((data, index) => (
