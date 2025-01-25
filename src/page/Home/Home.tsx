@@ -1,6 +1,8 @@
 
 import Banner from '../../components/banner/Banner';
+import Discount from './Discount';
 import PopularBooks from './PopularBooks';
+import Feedback from './Review';
 import BookCatagory from './catagory/BookCatagory';
 
 const Home = () => {
@@ -9,6 +11,8 @@ const Home = () => {
             <Banner/>
             <BookCatagory/>
             <PopularBooks/>
+            <Discount/>
+            <Feedback/>
         </div>
     );
 };

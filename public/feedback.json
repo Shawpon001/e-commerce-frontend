@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "name": "Alice Johnson",
+        "image": "https://example.com/images/alice.jpg",
+        "feedback": "The session was well-organized and covered all the topics in detail. I particularly enjoyed the interactive exercises that made the concepts easier to grasp. However, I think"
+    },
+    {
+        "id": 2,
+        "name": "Bob Smith",
+        "image": "https://example.com/images/bob.jpg",
+        "feedback": "The session was well-organized and covered all the topics in detail. I particularly enjoyed the interactive exercises that made the concepts easier to grasp. However, I think"
+    },
+    {
+        "id": 3,
+        "name": "Catherine Lee",
+        "image": "https://example.com/images/catherine.jpg",
+        "feedback": "The session was well-organized and covered all the topics in detail. I particularly enjoyed the interactive exercises that made the concepts easier to grasp. However, I think"
+    },
+    {
+        "id": 4,
+        "name": "David Kim",
+        "image": "https://example.com/images/david.jpg",
+        "feedback": "The session was well-organized and covered all the topics in detail. I particularly enjoyed the interactive exercises that made the concepts easier to grasp. However, I think"
+    },
+    {
+        "id": 5,
+        "name": "Ella Martinez",
+        "image": "https://example.com/images/ella.jpg",
+        "feedback":"The session was well-organized and covered all the topics in detail. I particularly enjoyed the interactive exercises that made the concepts easier to grasp. However, I think"
+    },
+    {
+        "id": 6,
+        "name": "Frank Williams",
+        "image": "https://example.com/images/frank.jpg",
+        "feedback": "The session was well-organized and covered all the topics in detail. I particularly enjoyed the interactive exercises that made the concepts easier to grasp. However, I think"
+    },
+    {
+        "id": 7,
+        "name": "Grace Brown",
+        "image": "https://example.com/images/grace.jpg",
+        "feedback": "The session was well-organized and covered all the topics in detail. I particularly enjoyed the interactive exercises that made the concepts easier to grasp. However, I think"
+    },
+    {
+        "id": 8,
+        "name": "Henry Davis",
+        "image": "https://example.com/images/henry.jpg",
+        "feedback": "The session was well-organized and covered all the topics in detail. I particularly enjoyed the interactive exercises that made the concepts easier to grasp. However, I think"
+    },
+    {
+        "id": 9,
+        "name": "Isabella Moore",
+        "image": "https://example.com/images/isabella.jpg",
+        "feedback": "The session was well-organized and covered all the topics in detail. I particularly enjoyed the interactive exercises that made the concepts easier to grasp. However, I think"
+    },
+    {
+        "id": 10,
+        "name": "Jack Wilson",
+        "image": "https://example.com/images/jack.jpg",
+        "feedback": "The session was well-organized and covered all the topics in detail. I particularly enjoyed the interactive exercises that made the concepts easier to grasp. However, I think"
+    }
+]
