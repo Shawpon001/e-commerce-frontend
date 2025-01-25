@@ -54,7 +54,7 @@ function Feedback() {
 
 
   return (
-    <div className="slider-container mb-10 mt-3 xl:px-20 md:px-5 px-2">
+    <div className="slider-container mb-10 mt-3 ">
       <h2 className="text-center mt-8 mb-5 font-serif text-3xl ">
         Our Clint Feedback
       </h2>

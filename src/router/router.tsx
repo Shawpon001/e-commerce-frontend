@@ -4,6 +4,10 @@ import Home from "../page/Home/Home";
 import Login from "../page/authprovider/Login";
 import Registation from "../page/authprovider/Registation";
 import DashboardLayout from "../mainLayOut/Deshboar";
+import About from "../page/about/About";
+import Bloge from "../page/bloge/Bloge";
+import Contact from "../page/contact/Contact";
+import Book from "../page/book/Book";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +19,22 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+      {
+        path: "/books",
+        element: <Book />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/bloge",
+        element: <Bloge />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
       // login routes
       {
         path: "/login",
@@ -24,8 +44,7 @@ const router = createBrowserRouter([
         path: "/registaion",
         element: <Registation />,
       },
-    ], 
-   
+    ],
   },
   {
     path: "/deshbaord",
