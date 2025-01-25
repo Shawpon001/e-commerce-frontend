@@ -3,6 +3,7 @@ import MainLayOut from "../mainLayOut/MainLayOut";
 import Home from "../page/Home/Home";
 import Login from "../page/authprovider/Login";
 import Registation from "../page/authprovider/Registation";
+import DashboardLayout from "../mainLayOut/Deshboar";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,12 @@ const router = createBrowserRouter([
         path: "/registaion",
         element: <Registation />,
       },
-    ],
+    ], 
+   
+  },
+  {
+    path: "/deshbaord",
+    element: <DashboardLayout />,
   },
 ]);
 
