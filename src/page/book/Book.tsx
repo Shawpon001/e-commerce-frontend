@@ -1,6 +1,43 @@
+import { useEffect, useState } from "react";
 import BookCard from "./BookCard";
+import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
+
+export interface Book {
+  _id: string;
+  title: string;
+  author: string;
+  price: number;
+  category: string;
+  image: string;
+  rating: number;
+}
+
 
 const Book = () => {
+
+  const [popularBooks, setPopularBooks] = useState([]);
+  // console.log(popularBooks);
+
+  const axiosPublic = useAxiosPublic();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosPublic.get(`/products/get-book`);
+        // console.log(response.data);
+        setPopularBooks(response.data.data || []);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [axiosPublic]);
+
+
+  if (!popularBooks) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="">
       {/*banner section */}
@@ -61,14 +98,10 @@ const Book = () => {
             </select>
           </div>
         </div>
-        <div className=" grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4">
-        <BookCard/>
-        <BookCard/>
-        <BookCard/>
-        <BookCard/>
-        <BookCard/>
-        <BookCard/>
-        <BookCard/>
+        <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4">
+          {popularBooks.map((book) => (
+            <BookCard key={book._id} book={book} />
+          ))}
         </div>
       </div>
        

@@ -3,7 +3,7 @@ import { FaDollarSign, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 
-interface Book {
+export interface Book {
   _id: string;
   title: string;
   author: string;
@@ -41,11 +41,13 @@ const PopularBooks = () => {
             Popular Books
           </h2>
           <div className="border-t-2 border-gray-300 w-[25%] md:w-[60%] lg:w-[65%] mt-4"></div>
-          <p>
-            <button className="btn rounded-3xl bg-[#F65D4E] text-white px-8">
+          <div>
+           <Link to="/books">
+           <button className="btn rounded-3xl bg-[#F65D4E] text-white px-8">
               View All
             </button>
-          </p>
+           </Link>
+          </div>
         </div>
 
         {/* Popular Book Grid Section */}
@@ -70,7 +72,7 @@ const PopularBooks = () => {
                       {book?.author}
                     </p>
                     <Link to={`/books/${book}`}>
-                      <h2 className="text-lg md:text-xl text-gray-800 font-bold line-clamp-2 hover:text-[#F65D4E]">
+                      <h2 className="text-lg md:text-xl text-gray-800 font-bold line-clamp-2 hover:text-teal-500">
                         <p>{book?.title}</p>
                       </h2>
                     </Link>
@@ -82,8 +84,8 @@ const PopularBooks = () => {
                     </div>
 
                     <h3 className="my-2 -ml-1 flex items-center">
-                      <FaDollarSign className="text-xl text-[#F65D4E] font-semibold" />
-                      <span className="text-xl md:text-2xl text-[#F65D4E] font-semibold -ml-1 -mt-1">
+                      <FaDollarSign className="text-xl text-teal-500 font-semibold" />
+                      <span className="text-xl md:text-2xl text-teal-500 font-semibold -ml-1 -mt-1">
                         {book?.price}
                       </span>
                     </h3>

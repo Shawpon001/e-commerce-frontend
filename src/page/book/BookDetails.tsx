@@ -1,4 +1,32 @@
+import { useEffect, useState } from "react";
+import { data, useParams } from "react-router-dom";
+import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
+
+
 const BookDetails = () => {
+  const _id = useParams();
+  const [book, setBook] = useState([]);
+  const axiosPublic = useAxiosPublic();
+
+  useEffect(() => {
+    const fetchBookDetails = async () => {
+      try {
+        const response = await axiosPublic.get(`/products/${_id.id}`);
+        console.log(data);
+
+        setBook(response.data.data);
+      } catch (error) {
+        console.error("Error fetching book details:", error);
+      }
+    };
+
+    fetchBookDetails();
+  }, [_id, axiosPublic]);
+
+  if (!book) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="w-full mt-10 px-5 md:px-14 px-5">
       <div className="bg-base-200  shadow-lg p-5">
@@ -6,25 +34,26 @@ const BookDetails = () => {
           {/* Product Image */}
           <div className="w-full lg:w-1/2 flex justify-center">
             <img
-              src="https://i.ibb.co.com/jHgvsvt/images-6.jpg"
+              src={book.image}
               alt="Product"
-              className="w-full max-w-[520px] h-[500px] object-cover "
+              className="w-full max-w-[430px] h-[500px] object-cover "
             />
           </div>
 
           {/* Product Details */}
           <div className="w-full lg:w-1/2">
             <h1 className="text-2xl font-bold text-gray-800 mb-3">
-              Lacing-detail Poplin Blouse
+              {book.title}
             </h1>
-            <p className="text-gray-600 mb-4">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Inventore natus, nemo, officia consequuntur quis veritatis
-              similique blanditiis, soluta vel eaque cum consectetur deleniti.
-              Rem quis iure adipisci, vero temporibus dolore!
+            <p className="text-gray-600 mb-4">{book.description}</p>
+            <p className="text-gray-500 mb-2">{book.author}</p>
+            <p className="text-2xl text-teal-600 font-semibold mb-5">
+              $ {book.price}
+              <span className="text-red-500 ml-4 line-through">
+                
+                ${book.discount}
+              </span>
             </p>
-            <p className="text-gray-500 mb-2">Brand: No Brand</p>
-            <p className="text-2xl text-teal-600 font-semibold mb-5">$79</p>
 
             {/* Quantity Section */}
             <div className=" mb-1">
