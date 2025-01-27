@@ -1,4 +1,5 @@
 import Banner from '../../components/banner/Banner';
+import Advertise from './Advertise';
 import Discount from './Discount';
 import PopularBooks from './PopularBooks';
 import Feedback from './Review';
@@ -11,6 +12,7 @@ const Home = () => {
            {/* <BookCatagory/> */}
             <PopularBooks/>
             <Discount/>
+            <Advertise/>
             <Feedback/>
            </div>
         </div>
