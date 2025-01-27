@@ -28,7 +28,7 @@ const Login = () => {
       const token = response.data?.token;
       if (token) {
         localStorage.setItem("jwtToken", token);
-        navigate("/dashboard");
+        navigate("/");
         Swal.fire({
           title: "login Succssfully!",
           icon: "success",

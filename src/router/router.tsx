@@ -10,6 +10,7 @@ import Contact from "../page/contact/Contact";
 import Book from "../page/book/Book";
 import BookDetails from "../page/book/BookDetails";
 import Cart from "../page/cart/Cart";
+import PrivateRoute from "../components/provider/PrivetRoute";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path:"books/ditales/:id",
-        element:<BookDetails/>
+        element: <PrivateRoute> <BookDetails/> </PrivateRoute>
       },
       {
         path: "/about",
@@ -65,7 +66,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute> ,
   },
 ]);
 
