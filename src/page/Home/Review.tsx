@@ -40,7 +40,7 @@ function Feedback() {
 
 
   const [student, setStudent] = useState([]);
-  console.log(student);
+  // console.log(student);
   
 
   useEffect(() => {

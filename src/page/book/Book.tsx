@@ -12,11 +12,11 @@ const Book = () => {
         />
       </div>
       {/* filtaring section */}
-      <h3 className=" text-center textarea-xl mt-12 font-medium">
+      <h3 className=" text-center textarea-xl mt-7 font-medium">
         The Leo Baeck Institute is a non-profit organization. Any income from
         the store is supporting the <br /> institute's activities.
       </h3>
-      <div className=" mt-10 md:px-12 px-2 ">
+      <div className=" mt-7 md:px-12 px-2 ">
         <div className=" flex w-full gap-10 justify-between">
           <div className="mb-4  w-full">
             <input

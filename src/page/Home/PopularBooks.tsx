@@ -1,26 +1,36 @@
 import { useEffect, useState } from "react";
 import { FaDollarSign, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
+
+interface Book {
+  _id: string;
+  title: string;
+  author: string;
+  price: number;
+  category: string;
+  image: string;
+  rating: number;
+}
 
 const PopularBooks = () => {
-  interface Book {
-    _id: string;
-    photo: string;
-    name: string;
-    category: string;
-    rating: number;
-  }
-
   const [popularBooks, setPopularBooks] = useState<Book[]>([]);
+  console.log(popularBooks);
 
+  const axiosPublic = useAxiosPublic();
   useEffect(() => {
-    fetch("../../../public/data.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setPopularBooks(data);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await axiosPublic.get(`/products/get-book`);
+        // console.log(response.data);
+        setPopularBooks(response.data.data || []);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [axiosPublic]);
 
   return (
     <div>
@@ -47,7 +57,7 @@ const PopularBooks = () => {
                   {/* Full Height Image */}
                   <div className="relative group">
                     <img
-                      src={book.photo}
+                      src={book.image}
                       width={500}
                       height={500}
                       className="w-56 h-72 object-cover rounded-xl mb-3 transition-transform hover:scale-105"
@@ -57,16 +67,16 @@ const PopularBooks = () => {
                   {/* Book Details */}
                   <div className="pt-3">
                     <p className="text-sm text-gray-600 mb-1 font-medium">
-                      {book.category}
+                      {book?.author}
                     </p>
                     <Link to={`/books/${book}`}>
                       <h2 className="text-lg md:text-xl text-gray-800 font-bold line-clamp-2 hover:text-[#F65D4E]">
-                        <p>{book.name}</p>
+                        <p>{book?.title}</p>
                       </h2>
                     </Link>
                     <div className="flex items-center mt-2">
                       <p className="text-gray-800 font-semibold flex items-center">
-                        Ratings:{book.rating}
+                        Ratings:{book?.rating}
                         <FaStar className="text-orange-400 ml-1 text-xs md:text-xl" />
                       </p>
                     </div>
@@ -74,7 +84,7 @@ const PopularBooks = () => {
                     <h3 className="my-2 -ml-1 flex items-center">
                       <FaDollarSign className="text-xl text-[#F65D4E] font-semibold" />
                       <span className="text-xl md:text-2xl text-[#F65D4E] font-semibold -ml-1 -mt-1">
-                        120
+                        {book?.price}
                       </span>
                     </h3>
                   </div>

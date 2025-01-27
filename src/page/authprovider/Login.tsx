@@ -2,12 +2,11 @@ import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  const handelRegister = (e: any) => {
+  const handelRegister = (e) => {
     e.preventDefault();
     const from = e.target;
     const email = from.email.value;
     const password = from.password.value;
-
     console.log(name, email, password);
   };
 
