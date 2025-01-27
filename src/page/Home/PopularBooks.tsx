@@ -24,9 +24,9 @@ const PopularBooks = () => {
 
   return (
     <div>
-      <div className="my-4 md:my-8 lg:mt-28 lg:mb-20 container mx-auto">
+      <div className="my-4 md:my-8 lg:mt-20 lg:mb-20 container mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex px-4 items-center justify-between mb-8">
           <h2 className="text-xl lg:text-4xl font-semibold text-black">
             Popular Books
           </h2>
@@ -39,7 +39,7 @@ const PopularBooks = () => {
         </div>
 
         {/* Popular Book Grid Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-2">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 p-2">
           <div className="col-span-1 lg:col-span-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {popularBooks?.map((book) => (
               <div key={book._id} className="col-span-1">
@@ -50,7 +50,7 @@ const PopularBooks = () => {
                       src={book.photo}
                       width={500}
                       height={500}
-                      className="w-56 h-80 object-cover rounded-xl mb-3 transition-transform hover:scale-105"
+                      className="w-56 h-72 object-cover rounded-xl mb-3 transition-transform hover:scale-105"
                     />
                   </div>
 

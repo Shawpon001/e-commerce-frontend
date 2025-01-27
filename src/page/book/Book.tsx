@@ -16,7 +16,7 @@ const Book = () => {
         The Leo Baeck Institute is a non-profit organization. Any income from
         the store is supporting the <br /> institute's activities.
       </h3>
-      <div className=" mt-10 px-12 ">
+      <div className=" mt-10 md:px-12 px-2 ">
         <div className=" flex w-full gap-10 justify-between">
           <div className="mb-4  w-full">
             <input
@@ -61,7 +61,7 @@ const Book = () => {
             </select>
           </div>
         </div>
-        <div className=" grid grid-cols-5 gap-4">
+        <div className=" grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4">
         <BookCard/>
         <BookCard/>
         <BookCard/>
