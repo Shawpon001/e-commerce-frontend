@@ -1,13 +1,46 @@
+import { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const handelRegister = (e) => {
+  const [, setError] = useState<string | null>(null); // Type for error state
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const from = e.target;
-    const email = from.email.value;
-    const password = from.password.value;
-    console.log(name, email, password);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    // Extract email and password
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      const response = await axiosPublic.post<{ token: string }>(
+        "/auth/login",
+        { email, password }
+      );
+      console.log(response);
+
+      const token = response.data?.token;
+      if (token) {
+        localStorage.setItem("jwtToken", token);
+        navigate("/dashboard");
+        Swal.fire({
+          title: "login Succssfully!",
+          icon: "success",
+          draggable: true,
+        });
+      } else {
+        setError("Login failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Invalid email or password.");
+    }
   };
 
   return (
@@ -18,7 +51,7 @@ const Login = () => {
           <img src="https://i.ibb.co.com/4RL2PxQ/17133825331.jpg" alt="" />
         </div>
         <div className=" bg-base-200 px-4 py-4 lg:max-w-3xl">
-          <form onSubmit={handelRegister} className="mt-8     gap-6">
+          <form onSubmit={handleLogin} className="mt-8     gap-6">
             <div className=" mb-2 ">
               <label
                 htmlFor="Email"
