@@ -1,53 +1,81 @@
 import { MdDeleteOutline } from "react-icons/md";
+import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
+import { useEffect, useState } from "react";
 
 const Cart = () => {
+  const [cart, setCart] = useState([]);
+  console.log(cart);
+
+  const axiosPublic = useAxiosPublic();
+
+  useEffect(() => {
+    const fetchBookDetails = async () => {
+      try {
+        const response = await axiosPublic.get("/cart/caritem-get");
+        console.log(response);
+
+        setCart(response.data.data);
+      } catch (error) {
+        console.error("Error fetching cart items:", error);
+      }
+    };
+
+    fetchBookDetails();
+  }, [axiosPublic]);
+
   return (
     <div className="px-4 sm:px-8 lg:px-10 px-5 mt-10">
       {/* Main container */}
-      <div className="flex flex-col  lg:flex-row w-full gap-8 lg:gap-24 justify-center">
+      <div className="flex flex-col lg:flex-row w-full gap-8 lg:gap-24 justify-center">
         {/* Cart items */}
-        <div className="w-full lg:w-2/3">
+        <div className="w-full  lg:w-2/3">
           <div className="flex justify-between items-center mb-5 px-2">
             <h2 className="text-xl lg:text-2xl font-medium">Shopping Cart</h2>
-            <p className="text-sm lg:text-base">1 Item</p>
+            <p className="text-sm lg:text-base text-xl">{cart.length} Item</p>
           </div>
           <div className="border border-gray-200 rounded-lg overflow-hidden">
-            <div className="flex flex-col sm:flex-row gap-4 p-4">
-              {/* Product Image */}
-              <img
-                src="https://i.ibb.co.com/jHgvsvt/images-6.jpg"
-                alt="Product"
-                className="w-full sm:w-[100px] h-[100px] sm:h-auto object-cover rounded-lg"
-              />
-              {/* Product Info */}
-              <div className="flex flex-col sm:flex-row justify-between w-full">
-                <div className="flex flex-col justify-between">
-                  <h3 className="text-lg font-semibold">
-                         Poplin Blouse
-                  </h3>
+            {cart.map((cartItems) => (
+              <div className="flex flex-col sm:flex-row gap-4 p-4">
+                {/* Product Image */}
+                <img
+                  src={cartItems.image}
+                  alt="Product"
+                  className="w-full sm:w-[100px] h-[100px] sm:h-auto object-cover rounded-lg"
+                />
+                {/* Product Info */}
+                <div className="flex flex-col sm:flex-row justify-between w-full">
+                  <div className="flex flex-col justify-between">
+                    <h3 className="text-lg font-semibold">
+                      {" "}
+                      {cartItems.title}{" "}
+                    </h3>
 
-                  <div className="flex items-center gap-4 mt-4 justify-between">
-                    <div className="flex items-center gap-4">
-                      <button className="border px-2 hover:bg-gray-300 transition">
-                        -
-                      </button>
-                      <span className="text-lg font-semibold border px-5">
-                        2
-                      </span>
-                      <button className="border px-2 hover:bg-gray-300 transition">
-                        +
+                    <div className="flex items-center gap-4 mt-4 justify-between">
+                      <div className="flex items-center gap-4">
+                        <button className="border px-2 hover:bg-gray-300 transition">
+                          -
+                        </button>
+                        <span className="text-lg font-semibold border px-5">
+                          2
+                        </span>
+                        <button className="border px-2 hover:bg-gray-300 transition">
+                          +
+                        </button>
+                      </div>
+                      <button className="hover:bg-red-600 hover:text-white px-3 py-1 text-teal-600 border transition flex items-center justify-center">
+                        <MdDeleteOutline className="text-2xl" />
                       </button>
                     </div>
-                    <button className="hover:bg-red-600 hover:text-white px-3 py-1 text-teal-600 border transition flex items-center justify-center">
-                      <MdDeleteOutline className="text-2xl" />
-                    </button>
                   </div>
+                  <p className="text-lg font-semibold w-[50px] text-right mt-4 sm:mt-0">
+                    <span className="hover:text-red-500 transition">
+                      {" "}
+                      ${cartItems.price}{" "}
+                    </span>
+                  </p>
                 </div>
-                <p className="text-lg font-semibold w-[50px] text-right mt-4 sm:mt-0">
-                  <span className="hover:text-red-500 transition"> $600 </span>
-                </p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
 

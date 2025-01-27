@@ -1,11 +1,23 @@
 import { useEffect, useState } from "react";
 import { data, useParams } from "react-router-dom";
 import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
+import { jwtDecode } from "jwt-decode";
+import Swal from "sweetalert2";
 
+interface Book {
+  _id: string;
+  title: string;
+  description: string;
+  author: string;
+  price: number;
+  discount: number;
+  image: string;
+  quantity: number;
+}
 
 const BookDetails = () => {
   const _id = useParams();
-  const [book, setBook] = useState([]);
+  const [book, setBook] = useState<Book | null>(null); //
   const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
@@ -23,9 +35,51 @@ const BookDetails = () => {
     fetchBookDetails();
   }, [_id, axiosPublic]);
 
+
+  const addToCart = async () => {
+    const token = localStorage.getItem("jwtToken");
+
+    if (!token) {
+      alert("Please login to add to cart.");
+      return;
+    }
+    const decodedToken =jwtDecode(token); // Type the decoded token
+      const userEmail = decodedToken?.email;
+
+    
+    const cartData = {
+      productId: book._id,
+      title: book.title,
+      price: book.price,
+      image: book?.image,
+      userEmail,
+    };
+    console.log(cartData);
+    
+    try {
+      const response = await axiosPublic.post("/cart/create-cart", cartData);
+      if (response.data) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Product added to cart successfully!",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      } else {
+        alert("Failed to add product to cart.");
+      }
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+      alert("Error adding product to cart.");
+    }
+  
+  }
+
   if (!book) {
     return <div>Loading...</div>;
   }
+
 
   return (
     <div className="w-full mt-10 px-5 md:px-14 px-5">
@@ -57,29 +111,19 @@ const BookDetails = () => {
 
             {/* Quantity Section */}
             <div className=" mb-1">
-              <p className="text-lg font-medium text-gray-800">Quantity</p>
-              <div className="flex mt-3 mb-12 items-center gap-4">
-                <button className="border px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300">
-                  -
-                </button>
-                <span className="text-xl font-semibold">2</span>
-                <button className="border px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300">
-                  +
-                </button>
-              </div>
+              <p className="text-lg font-medium mb-7 text-gray-800"> Books {book.quantity} pis   Aviable </p>
             </div>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-5">
-              <button className="bg-[#071214] text-white px-5 py-3 rounded-lg w-full sm:w-auto shadow-md hover:bg-[#19bcd1] transition">
-                Buy Now
+              <button onClick={addToCart} className="bg-[#071214] text-white px-5 py-3 rounded-lg w-full sm:w-auto shadow-md hover:bg-[#19bcd1] transition">
+              Add to Cart
               </button>
               <button className="bg-teal-600 text-white px-5 py-3 rounded-lg w-full sm:w-auto shadow-md hover:bg-orange-600 transition">
-                Add to Cart
+                Add to wishlist
               </button>
             </div>
             {/* image */}
-
             <div className=" grid grid-cols-3 gap-4 mt-5 w-[200px] h-[100px] ">
               <img
                 src="https://i.ibb.co.com/jHgvsvt/images-6.jpg"
