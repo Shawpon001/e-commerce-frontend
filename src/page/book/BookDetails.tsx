@@ -1,85 +1,78 @@
 const BookDetails = () => {
-    return (
-        <div>
-             <div className="max-w-screen-2xl ontainer bg-slate-100 mx-auto xl:px-24 px-4 ">
-      <div className="flex flex-col lg:flex-row items-start gap-5  justify-between">
-        <div className="lg:w-[670px] xl:w-[870px] border-2  w-full">
-          <div className="hero min-h-screen bg-base-200">
-            <div className="hero-content flex-col lg:flex-row">
-              <div className="lg:w-[260px] xl:w-[470px] w-full lg:h-[300px] xl:h-[400px] border">
-                <img
-                  src=""
-                  className="w-full h-full object-cover rounded-lg shadow-2xl"
-                />
+  return (
+    <div className="w-full mt-10 px-5 md:px-14 px-5">
+      <div className="bg-base-200  shadow-lg p-5">
+        <div className="flex flex-col lg:flex-row justify-center items-start gap-10">
+          {/* Product Image */}
+          <div className="w-full lg:w-1/2 flex justify-center">
+            <img
+              src="https://i.ibb.co.com/jHgvsvt/images-6.jpg"
+              alt="Product"
+              className="w-full max-w-[520px] h-[500px] object-cover "
+            />
+          </div>
+
+          {/* Product Details */}
+          <div className="w-full lg:w-1/2">
+            <h1 className="text-2xl font-bold text-gray-800 mb-3">
+              Lacing-detail Poplin Blouse
+            </h1>
+            <p className="text-gray-600 mb-4">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Inventore natus, nemo, officia consequuntur quis veritatis
+              similique blanditiis, soluta vel eaque cum consectetur deleniti.
+              Rem quis iure adipisci, vero temporibus dolore!
+            </p>
+            <p className="text-gray-500 mb-2">Brand: No Brand</p>
+            <p className="text-2xl text-teal-600 font-semibold mb-5">$79</p>
+
+            {/* Quantity Section */}
+            <div className=" mb-6">
+              <p className="text-lg font-medium text-gray-800">Quantity</p>
+              <div className="flex mt-3 mb-12 items-center gap-4">
+                <button className="border px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300">
+                  -
+                </button>
+                <span className="text-xl font-semibold">2</span>
+                <button className="border px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300">
+                  +
+                </button>
               </div>
-              <div className="lg:w-[330px] w-full mt-5 lg:mt-0 lg:ml-5">
-                <h1 className="text-xl font-bold"> name </h1>
-                <p>reating</p>
-                <p>Brand : No Brand | More Foods From No Brand</p>
-                <p className="text-2xl mt-5 mb-4 text-orange-500 font-semibold">
-                  $ 79
-                </p>
-                {/* Size section */}
-                <div className="mb-6 w-[320px] text-gray-600">
-                  <div className="flex gap-2 mt-5">
-                    <div className="border-orange-500 p-1 py-1 px-3 font-mono text-black">
-                      <img
-                        src="https://i.ibb.co/nD8Dcxb/pizza-5179939-640.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div className="border-orange-500 p-1 py-1 px-3 font-mono text-black">
-                      <img
-                        src="https://i.ibb.co/nD8Dcxb/pizza-5179939-640.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div className="border-orange-500 p-1 py-1 px-3 font-mono text-black">
-                      <img
-                        src="https://i.ibb.co/nD8Dcxb/pizza-5179939-640.jpg"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                  <div className="flex mt-7 mb-2 gap-10">
-                    <p className="text-black">Quantity</p>
-                    <div className="flex gap-8 text-xl">
-                      {/* Decrease button */}
-                      <button className="border-2 px-2 bg-gray-200">-</button>
-                      {/* Total quantity */}
-                      <button>2</button>
-                      <button className="border-2 px-2 bg-gray-200">+</button>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex justify-center lg:justify-start gap-5 items-center">
-                  <button className="border-2 p-2 rounded-sm text-white lg:w-[150px] w-full md:w-[220px] bg-[#1ed5f5]">
-                    Buy Now
-                  </button>
-                  <button 
-                //   onClick={() => handelAddCart()}
-                   className="border-2 p-2 rounded-sm text-white lg:w-[150px] w-full md:w-[220px] bg-orange-500">
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-5">
+              <button className="bg-[#071214] text-white px-5 py-3 rounded-lg w-full sm:w-auto shadow-md hover:bg-[#19bcd1] transition">
+                Buy Now
+              </button>
+              <button className="bg-teal-600 text-white px-5 py-3 rounded-lg w-full sm:w-auto shadow-md hover:bg-orange-600 transition">
+                Add to Cart
+              </button>
+            </div>
+            {/* image */}
+
+            <div className=" grid grid-cols-3 gap-4 mt-5 w-[200px] h-[100px] ">
+              <img
+                src="https://i.ibb.co.com/jHgvsvt/images-6.jpg"
+                className=" "
+                alt=""
+              />
+              <img
+                src="https://i.ibb.co.com/jHgvsvt/images-6.jpg"
+                className=" "
+                alt=""
+              />
+              <img
+                src="https://i.ibb.co.com/jHgvsvt/images-6.jpg"
+                className=" "
+                alt=""
+              />
             </div>
           </div>
         </div>
       </div>
-      {/* review page */}
-      <div className="mb-5 mt-5">
-        <p>Ratings & Reviews</p>
-
-        {/* <ReviewFrom /> */}
-        {/* <TotalReview /> */}
-      </div>
-      <div className=" mb-9 mt-4 ">
-        {/* <Review></Review> */}
-      </div>
     </div>
-        </div>
-    );
+  );
 };
 
 export default BookDetails;
