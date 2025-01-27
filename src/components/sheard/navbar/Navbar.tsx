@@ -64,9 +64,9 @@ const Navbar = () => {
               >
                 Sign In
               </Link>
-              <a href="#" className="hidden lg:flex">
+              <Link to="/cart" className="hidden lg:flex">
                 <FaCartShopping className="h-6 w-6 text-gray-500 hover:text-gray-700" />
-              </a>
+              </Link>
             </div>
 
             <div className="block md:hidden">

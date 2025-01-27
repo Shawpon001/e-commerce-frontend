@@ -9,6 +9,7 @@ import Bloge from "../page/bloge/Bloge";
 import Contact from "../page/contact/Contact";
 import Book from "../page/book/Book";
 import BookDetails from "../page/book/BookDetails";
+import Cart from "../page/cart/Cart";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       // login routes
       {

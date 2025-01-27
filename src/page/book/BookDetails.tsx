@@ -27,7 +27,7 @@ const BookDetails = () => {
             <p className="text-2xl text-teal-600 font-semibold mb-5">$79</p>
 
             {/* Quantity Section */}
-            <div className=" mb-6">
+            <div className=" mb-1">
               <p className="text-lg font-medium text-gray-800">Quantity</p>
               <div className="flex mt-3 mb-12 items-center gap-4">
                 <button className="border px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300">
