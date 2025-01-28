@@ -1,36 +1,66 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MdDeleteOutline } from "react-icons/md";
 import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; // Add useState for managing quantity
 import Swal from "sweetalert2";
-
+import UseCart from "../../hooks/UseCart";
+import Modal from "./Modal";
+import { jwtDecode } from "jwt-decode";
+interface DecodedToken {
+  email: string;
+}
 const Cart = () => {
-  const [cart, setCart] = useState([]);
-  console.log(cart);
-
+  const [cart, refetch] = UseCart();
   const axiosPublic = useAxiosPublic();
 
-  useEffect(() => {
-    const fetchBookDetails = async () => {
-      try {
-        const response = await axiosPublic.get("/cart/caritem-get");
-        console.log(response);
+  // State to manage quantity for each cart item
+  const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
 
-        setCart(response.data.data);
-      } catch (error) {
-        console.error("Error fetching cart items:", error);
-      }
-    };
 
-    fetchBookDetails();
-  }, [axiosPublic]);
+  useState(() => {
+    const initialQuantities: { [key: string]: number } = {};
+    cart.forEach((item) => {
+      initialQuantities[item._id] = 1;
+    });
+    setQuantities(initialQuantities);
+  }, [cart]);
 
+  // Handle increase quantity
+  const handleIncrease = (id: string) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [id]: (prev[id] || 1) + 1, // Increment quantity
+    }));
+  };
+
+  // Handle decrease quantity
+  const handleDecrease = (id: string) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [id]: Math.max(1, (prev[id] || 1) - 1),
+    }));
+  };
+
+  // Calculate total price 
+  const calculateItemTotal = (price: number, quantity: number) => {
+    return price * quantity;
+  };
+
+  // Calculate subtotal for all items in the cart
+  const calculateSubtotal = () => {
+    return cart.reduce((total, item) => {
+      const quantity = quantities[item._id] || 1;
+      return total + item.price * quantity;
+    }, 0);
+  };
+
+
+  // Handle delete item
   const handelDelet = async (id: any) => {
-    console.log("Deleting item with ID:", id);
-    setCart((prevCart) => prevCart.filter((item) => item._id !== id));
     try {
       const response = await axiosPublic.delete(`cart/delete/${id}`);
       console.log("Delete response:", response);
+      refetch();
 
       Swal.fire({
         position: "top-end",
@@ -50,42 +80,112 @@ const Cart = () => {
     }
   };
 
+
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
+
+// Retrieve user email from token
+useEffect(() => {
+  const token = localStorage.getItem("jwtToken");
+  if (token) {
+    try {
+      const decoded = jwtDecode<DecodedToken>(token);
+      setUserEmail(decoded.email);
+    } catch (error) {
+      console.error("Failed to decode JWT token:", error);
+    }
+  }
+}, []);
+
+const handleCheckout = async () => {
+
+  if (!userEmail) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "User email not found. Please log in again.",
+    });
+    return;
+  }
+
+  const checkoutData = {
+    totalPrice: calculateSubtotal().toFixed(2),
+    products: cart.map((item) => ({
+      id: item._id,
+      title: item.title,
+      quantity: quantities[item._id] || 1,
+    })),
+    userEmail,
+  };
+
+  console.log(checkoutData,"my send data");
+  
+
+  try {
+    const response = await axiosPublic.post('/order/checkout', checkoutData);
+    console.log('Checkout response:', response);
+
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Checkout Successful',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+
+  } catch (error) {
+    console.error('Error during checkout:', error);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      title: 'Checkout Failed',
+      showConfirmButton: true,
+    });
+  }
+};
+
   return (
     <div className="px-4 sm:px-8 lg:px-10 px-5 mt-10">
       {/* Main container */}
       <div className="flex flex-col lg:flex-row w-full gap-8 lg:gap-24 justify-center">
         {/* Cart items */}
-        <div className="w-full  lg:w-2/3">
+        <div className="w-full lg:w-2/3">
           <div className="flex justify-between items-center mb-5 px-2">
             <h2 className="text-xl lg:text-2xl font-medium">Shopping Cart</h2>
             <p className="text-sm lg:text-base text-xl">{cart.length} Item</p>
           </div>
           <div className="border border-gray-200 rounded-lg overflow-hidden">
             {cart.map((cartItems) => (
-              <div className="flex flex-col border border-gray-200 sm:flex-row gap-4 p-4">
+              <div
+                key={cartItems._id}
+                className="flex flex-col border border-gray-200 sm:flex-row gap-4 p-4"
+              >
                 {/* Product Image */}
                 <img
-                  src={cartItems.image}
+                  src={cartItems?.image}
                   alt="Product"
-                  className="w-full sm:w-[100px] h-[100px]  object-cover rounded-lg"
+                  className="w-full sm:w-[100px] h-[100px] object-cover rounded-lg"
                 />
                 {/* Product Info */}
                 <div className="flex flex-col sm:flex-row justify-between w-full">
                   <div className="flex flex-col justify-between">
-                    <h3 className="text-lg font-semibold">
-                      {" "}
-                      {cartItems.title}{" "}
-                    </h3>
+                    <h3 className="text-lg font-semibold">{cartItems.title}</h3>
 
                     <div className="flex items-center gap-4 mt-4 justify-between">
                       <div className="flex items-center gap-4">
-                        <button className="border px-2 hover:bg-gray-300 transition">
+                        <button
+                          onClick={() => handleDecrease(cartItems._id)}
+                          className="border px-2 hover:bg-gray-300 transition"
+                        >
                           -
                         </button>
                         <span className="text-lg font-semibold border px-5">
-                          2
+                          {quantities[cartItems._id] || 1}
                         </span>
-                        <button className="border px-2 hover:bg-gray-300 transition">
+                        <button
+                          onClick={() => handleIncrease(cartItems._id)}
+                          className="border px-2 hover:bg-gray-300 transition"
+                        >
                           +
                         </button>
                       </div>
@@ -99,8 +199,7 @@ const Cart = () => {
                   </div>
                   <p className="text-lg font-semibold w-[50px] text-right mt-4 sm:mt-0">
                     <span className="hover:text-red-500 transition">
-                      {" "}
-                      ${cartItems.price}{" "}
+                      ${calculateItemTotal(cartItems.price, quantities[cartItems._id] || 1)}
                     </span>
                   </p>
                 </div>
@@ -115,13 +214,16 @@ const Cart = () => {
             You have free shipping
           </h1>
           <progress className="progress bg-white w-full mb-10"></progress>
+          <div className="w-full flex justify-end">
+         <Modal/>
+          </div>
           <div className="font-semibold">
             <p className="text-lg font-medium mb-3">Order Summary</p>
             <p className="flex justify-between mb-2">
-              Product <span>$75.00</span>
+              Product <span>${calculateSubtotal().toFixed(2)}</span>
             </p>
             <p className="flex justify-between mb-2">
-              Saving <span className="text-red-400">- $15.00</span>
+              Saving <span className="text-red-400">- $0.00</span>
             </p>
             <p className="flex justify-between mb-2">
               Shipping <span>Calculate at checkout</span>
@@ -130,7 +232,7 @@ const Cart = () => {
               Discount <span>Apply at checkout</span>
             </p>
             <h3 className="flex justify-between text-lg font-bold mb-4">
-              Subtotal <span>$175.00 CAD</span>
+              Subtotal <span>${calculateSubtotal().toFixed(2)}</span>
             </h3>
             {/* Email Opt-in */}
             <div className="border border-gray-300 rounded-lg p-3 mb-6">
@@ -151,7 +253,7 @@ const Cart = () => {
               </label>
             </div>
             {/* Checkout Button */}
-            <button className="w-full bg-teal-600 text-white py-3 rounded-lg uppercase font-medium hover:bg-teal-700 transition">
+            <button onClick={handleCheckout} className="w-full bg-teal-600 text-white py-3 rounded-lg uppercase font-medium hover:bg-teal-700 transition">
               Checkout
             </button>
           </div>

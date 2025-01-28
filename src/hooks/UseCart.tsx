@@ -1,8 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../axiosPublic/useAxiosPublic";
 import { jwtDecode } from "jwt-decode";
-
-
 // Define interfaces for types
 interface DecodedToken {
     email: string;
@@ -48,10 +46,12 @@ const UseCart = (): [CartItem[], () => void] => {
             if (!response.data.status) {
                 throw new Error("Failed to fetch cart data");
             }
+            // console.log(response,"datas");
+            return response.data.data; 
 
-            return response.data.data; // Access the `data` array from the API response
+            
         },
-        enabled: !!userEmail, // Query runs only if the userEmail exists
+        enabled: !!userEmail,
     });
 
     return [cart, refetch];

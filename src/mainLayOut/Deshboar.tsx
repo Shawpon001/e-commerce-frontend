@@ -47,7 +47,7 @@ const DashboardLayout = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu p-4 w-52 bg-[#d24df3]  min-h-full  text-base-content">
+            <ul className="menu p-4 w-52 bg-[#a89dacc5]  min-h-full  text-base-content">
               {/* Sidebar content here */}
               <li>
                 <Link className="flex justify-start gap-10" to={"/dashboard"}>

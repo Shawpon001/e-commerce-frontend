@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const BookCard = ({ book }) => {
-  console.log(book);
+
 
   return (
     <div className=" mt-16">

@@ -14,7 +14,7 @@ const Navbar = () => {
   const axiosPublic = useAxiosPublic();
 
   const [cart, refetch] = UseCart();
-   console.log(cart ,"ddddddddd");
+  
    
 
   useEffect(() => {
