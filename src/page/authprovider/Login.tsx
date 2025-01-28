@@ -5,7 +5,7 @@ import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const [, setError] = useState<string | null>(null); // Type for error state
+  const [, setError] = useState<string | null>(null); 
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
@@ -30,9 +30,11 @@ const Login = () => {
         localStorage.setItem("jwtToken", token);
         navigate("/");
         Swal.fire({
-          title: "login Succssfully!",
+          position: "top-end",
           icon: "success",
-          draggable: true,
+          title: "User Login Succssfully",
+          showConfirmButton: false,
+          timer: 1500,
         });
       } else {
         setError("Login failed. Please try again.");

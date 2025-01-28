@@ -17,7 +17,7 @@ interface Book {
 
 const BookDetails = () => {
   const _id = useParams();
-  const [book, setBook] = useState<Book | null>(null); //
+  const [book, setBook] = useState<Book | null>(null);
   const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
@@ -45,9 +45,8 @@ const BookDetails = () => {
     }
     const decodedToken =jwtDecode(token); // Type the decoded token
       const userEmail = decodedToken?.email;
-
-    
-    const cartData = {
+      
+      const cartData = {
       productId: book._id,
       title: book.title,
       price: book.price,

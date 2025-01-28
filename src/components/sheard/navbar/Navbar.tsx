@@ -1,9 +1,54 @@
 import { CiSearch } from "react-icons/ci";
 import { FaCartShopping } from "react-icons/fa6";
 import { IoMenuSharp } from "react-icons/io5";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import SubNavbar from "./SubNavbar";
+import { jwtDecode } from "jwt-decode";
+import { useEffect, useState } from "react";
+import useAxiosPublic from "../../../axiosPublic/useAxiosPublic";
+import Swal from "sweetalert2";
 const Navbar = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwtToken");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        const currentTime = Date.now() / 1000;
+        if (decodedToken.exp > currentTime) {
+          setIsAuthenticated(true);
+        } else {
+          localStorage.removeItem("jwtToken"); // Remove expired token
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error("Invalid token:", error);
+        localStorage.removeItem("jwtToken");
+      }
+    }
+  }, []);
+
+  const logoutHandler = async () => {
+    try {
+      await axiosPublic.post("/auth/logout");
+      localStorage.removeItem("jwtToken");
+      setIsAuthenticated(false);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User Logout",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
     <header className="bg-gray-200">
       <SubNavbar />
@@ -58,12 +103,56 @@ const Navbar = () => {
                   </div>
                 </form>
               </div>
-              <Link
+              {/* <Link
                 to="/login"
                 className="hidden lg:flex rounded-md bg-teal-600 px-2 md:px-5 py-2 md:py-2.5 text-sm font-medium text-white shadow"
               >
                 Sign In
-              </Link>
+              </Link> */}
+              {isAuthenticated ? (
+                <>
+                  <button className="hidden lg:flex  md:px-5 py-2 md:py-2.5 text-sm font-medium">
+                    <div className="dropdown dropdown-end">
+                      <div
+                        tabIndex={0}
+                        role="button"
+                        className="btn btn-ghost btn-circle avatar"
+                      >
+                        <div className="w-10 rounded-full">
+                          <img
+                            alt="Tailwind CSS Navbar component"
+                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                          />
+                        </div>
+                      </div>
+                      <ul
+                        tabIndex={0}
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                      >
+                        <Link to="/deshboard">
+                        
+                        <li>
+                          <a className="justify-between">
+                            Deshboard
+                            <span className="badge">New</span>
+                          </a>
+                        </li>
+                        </Link>
+                        <li onClick={logoutHandler}>
+                          <a>Logout</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </button>
+                </>
+              ) : (
+                <Link
+                  to="/login"
+                  className="hidden lg:flex rounded-md bg-teal-600 px-2 md:px-5 py-2 md:py-2.5 text-sm font-medium text-white shadow"
+                >
+                  Sign In
+                </Link>
+              )}
               <Link to="/cart" className="hidden lg:flex">
                 <FaCartShopping className="h-6 w-6 text-gray-500 hover:text-gray-700" />
               </Link>
