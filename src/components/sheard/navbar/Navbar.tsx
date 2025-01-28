@@ -7,10 +7,15 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../../axiosPublic/useAxiosPublic";
 import Swal from "sweetalert2";
+import UseCart from "../../../hooks/UseCart";
 const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
+
+  const [cart, refetch] = UseCart();
+   console.log(cart ,"ddddddddd");
+   
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
@@ -154,7 +159,9 @@ const Navbar = () => {
                 </Link>
               )}
               <Link to="/cart" className="hidden lg:flex">
-                <FaCartShopping className="h-6 w-6 text-gray-500 hover:text-gray-700" />
+                <FaCartShopping className="h-6 w-6 text-gray-500 hover:text-gray-700"  /><span className="badge badge-sm indicator-item">
+                  {cart?.length || 0}
+                </span>
               </Link>
             </div>
 

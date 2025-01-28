@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MdDeleteOutline } from "react-icons/md";
 import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
@@ -23,6 +25,31 @@ const Cart = () => {
     fetchBookDetails();
   }, [axiosPublic]);
 
+  const handelDelet = async (id: any) => {
+    console.log("Deleting item with ID:", id);
+    setCart((prevCart) => prevCart.filter((item) => item._id !== id));
+    try {
+      const response = await axiosPublic.delete(`cart/delete/${id}`);
+      console.log("Delete response:", response);
+
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Item Deleted Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      console.error("Error deleting the item:", error);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Failed to Delete Item",
+        showConfirmButton: true,
+      });
+    }
+  };
+
   return (
     <div className="px-4 sm:px-8 lg:px-10 px-5 mt-10">
       {/* Main container */}
@@ -35,12 +62,12 @@ const Cart = () => {
           </div>
           <div className="border border-gray-200 rounded-lg overflow-hidden">
             {cart.map((cartItems) => (
-              <div className="flex flex-col sm:flex-row gap-4 p-4">
+              <div className="flex flex-col border border-gray-200 sm:flex-row gap-4 p-4">
                 {/* Product Image */}
                 <img
                   src={cartItems.image}
                   alt="Product"
-                  className="w-full sm:w-[100px] h-[100px] sm:h-auto object-cover rounded-lg"
+                  className="w-full sm:w-[100px] h-[100px]  object-cover rounded-lg"
                 />
                 {/* Product Info */}
                 <div className="flex flex-col sm:flex-row justify-between w-full">
@@ -62,7 +89,10 @@ const Cart = () => {
                           +
                         </button>
                       </div>
-                      <button className="hover:bg-red-600 hover:text-white px-3 py-1 text-teal-600 border transition flex items-center justify-center">
+                      <button
+                        onClick={() => handelDelet(cartItems._id)}
+                        className="hover:bg-red-600 hover:text-white px-3 py-1 text-teal-600 border transition flex items-center justify-center"
+                      >
                         <MdDeleteOutline className="text-2xl" />
                       </button>
                     </div>
@@ -80,7 +110,7 @@ const Cart = () => {
         </div>
 
         {/* Checkout Summary */}
-        <div className="w-full lg:w-1/3 bg-[#f8e6e6] mt-2 p-4 shadow-md">
+        <div className="w-full h-fit lg:w-1/3 bg-[#f8e6e6] mt-2 p-4 shadow-md">
           <h1 className="text-center text-sm font-medium py-2">
             You have free shipping
           </h1>

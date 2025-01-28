@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import BookCard from "./BookCard";
 import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
@@ -11,28 +12,38 @@ export interface Book {
   image: string;
   rating: number;
 }
-
-
 const Book = () => {
-
-  const [popularBooks, setPopularBooks] = useState([]);
-  // console.log(popularBooks);
-
+  const [popularBooks, setPopularBooks] = useState<Book[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [priceFilter, setPriceFilter] = useState<string>("");
   const axiosPublic = useAxiosPublic();
+
+  // Fetch books based on filters
+  const fetchBooks = async () => {
+    try {
+      const response = await axiosPublic.get("/products/get-book", {
+        params: {
+          searchTerm,
+          category: selectedCategory,
+          priceFilter, // Send price filter here
+        },
+      });
+
+      setPopularBooks(response.data.data || []);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // Trigger book fetch when filters change
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axiosPublic.get(`/products/get-book`);
-        // console.log(response.data);
-        setPopularBooks(response.data.data || []);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+    fetchBooks();
+  }, [searchTerm, selectedCategory, priceFilter]); // Dependencies will trigger fetch
 
-    fetchData();
-  }, [axiosPublic]);
-
+  const handleSearch = () => {
+    fetchBooks(); // Call fetchBooks when search button is clicked
+  };
 
   if (!popularBooks) {
     return <div>Loading...</div>;
@@ -57,16 +68,26 @@ const Book = () => {
         <div className=" flex w-full gap-10 justify-between">
           <div className="mb-4  w-full">
             <input
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               type="text"
               id="text"
+              placeholder="search name author name"
               name="text"
               className="mt-1 w-full  px-5  py-2  rounded-md bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
-          <button className="btn bg-teal-600 text-white"> Search</button>
-          <select className="select select-bordered w-full max-w-xs">
+          <button onClick={handleSearch} className="btn bg-teal-600 text-white">
+            {" "}
+            Search
+          </button>
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="select select-bordered w-full max-w-xs"
+          >
             <option disabled selected>
-              Who shot first?
+              Select Category
             </option>
             <option>Han Solo</option>
             <option>Greedo</option>
@@ -89,12 +110,18 @@ const Book = () => {
           </label>
 
           <div className="flex justify-end mt-5">
-            <select className="select select-bordered w-full max-w-xs">
+            <select
+              className="select select-bordered w-full max-w-xs"
+              value={priceFilter}
+              onChange={(e) => setPriceFilter(e.target.value)} // Set priceFilter
+            >
               <option disabled selected>
-                Who shot first?
+                Sort by Price
               </option>
-              <option>Han Solo</option>
-              <option>Greedo</option>
+              <option defaultValue="asc" value="asc">
+                Price: Low to High
+              </option>
+              <option value="desc">Price: High to Low</option>
             </select>
           </div>
         </div>
@@ -104,7 +131,6 @@ const Book = () => {
           ))}
         </div>
       </div>
-       
     </div>
   );
 };
