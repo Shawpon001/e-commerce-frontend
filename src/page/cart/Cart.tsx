@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MdDeleteOutline } from "react-icons/md";
 import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
@@ -12,14 +13,13 @@ interface DecodedToken {
 }
 const Cart = () => {
   const [cart, refetch] = UseCart();
-  console.log(cart ,);
-   const navigate = useNavigate()
-  
+  console.log(cart);
+  const navigate = useNavigate();
+
   const axiosPublic = useAxiosPublic();
 
   // State to manage quantity for each cart item
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
-
 
   useState(() => {
     const initialQuantities: { [key: string]: number } = {};
@@ -45,7 +45,7 @@ const Cart = () => {
     }));
   };
 
-  // Calculate total price 
+  // Calculate total price
   const calculateItemTotal = (price: number, quantity: number) => {
     return price * quantity;
   };
@@ -57,7 +57,6 @@ const Cart = () => {
       return total + item.price * quantity;
     }, 0);
   };
-
 
   // Handle delete item
   const handelDelet = async (id: any) => {
@@ -84,76 +83,160 @@ const Cart = () => {
     }
   };
 
-
   const [userEmail, setUserEmail] = useState<string | null>(null);
 
-
-// Retrieve user email from token
-useEffect(() => {
-  const token = localStorage.getItem("jwtToken");
-  if (token) {
-    try {
-      const decoded = jwtDecode<DecodedToken>(token);
-      setUserEmail(decoded.email);
-    } catch (error) {
-      console.error("Failed to decode JWT token:", error);
+  // Retrieve user email from token
+  useEffect(() => {
+    const token = localStorage.getItem("jwtToken");
+    if (token) {
+      try {
+        const decoded = jwtDecode<DecodedToken>(token);
+        setUserEmail(decoded.email);
+      } catch (error) {
+        console.error("Failed to decode JWT token:", error);
+      }
     }
-  }
-}, []);
+  }, []);
 
-const handleCheckout = async () => {
+  // const handleCheckout = async () => {
 
-  if (!userEmail) {
-    Swal.fire({
-      icon: "error",
-      title: "Error",
-      text: "User email not found. Please log in again.",
-    });
-    return;
-  }
+  //   if (!userEmail) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Error",
+  //       text: "User email not found. Please log in again.",
+  //     });
+  //     return;
+  //   }
 
-  const checkoutData = {
-    totalPrice: calculateSubtotal().toFixed(2),
-    products: cart.map((item) => ({
-      id: item._id,
-      title: item.title,
-      quantity: quantities[item._id] || 1,
-    })),
-    userEmail,
+  //   const checkoutData = {
+  //     totalPrice: calculateSubtotal().toFixed(2),
+  //     products: cart.map((item) => ({
+  //       id: item._id,
+  //       title: item.title,
+  //       quantity: quantities[item._id] || 1,
+  //     })),
+  //     userEmail,
+  //   };
+
+  //   console.log(checkoutData,"my send data");
+
+  //   try {
+  //     // const response = await axiosPublic.post('/payment', checkoutData);
+  //     // console.log('Checkout response:', response.data);
+  //     // fetch("http://localhost:5000/api/payment", {
+  //     //   method: "POST",
+  //     //   headers: { "Content-Type": "application/json" },
+  //     //   body: JSON.stringify(checkoutData),
+  //     // })
+  //     //   .then((res) => res.json())
+  //     //   .then((result) => {
+  //     //     window.location.replace(result.url)
+  //     //     console.log(result);
+  //     //   })
+
+  //       // Simulate payment success (you need to handle this after actual success)
+  //     // Swal.fire({
+  //     //   position: 'top-end',
+  //     //   icon: 'success',
+  //     //   title: 'Checkout Successful',
+  //     //   showConfirmButton: false,
+  //     //   timer: 1500,
+  //     // });
+
+  //     if(paymentSuccess){
+  //       for (const item of cart) {
+  //         await axiosPublic.delete(`/cart/delete/${item._id}`);
+  //         refetch()
+  //         navigate("/deshboard")
+  //       }
+  //     }
+
+  //   } catch (error) {
+  //     console.error('Error during checkout:', error);
+  //     Swal.fire({
+  //       position: 'top-end',
+  //       icon: 'error',
+  //       title: 'Checkout Failed',
+  //       showConfirmButton: true,
+  //     });
+  //   }
+  // };
+
+  const handleCheckout = async () => {
+    if (!userEmail) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "User email not found. Please log in again.",
+      });
+      return;
+    }
+
+    const checkoutData = {
+      totalPrice: calculateSubtotal().toFixed(2),
+      products: cart.map((item) => ({
+        id: item._id,
+        title: item.title,
+        quantity: quantities[item._id] || 1,
+      })),
+      userEmail,
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/api/payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(checkoutData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.url) {
+        window.location.replace(result.url);
+      } else {
+        console.error("Checkout Error:", result.error, result.details);
+        Swal.fire({
+          icon: "error",
+          title: "Checkout Failed",
+          text: result.error || "An error occurred during checkout.",
+        });
+      }
+    } catch (error) {
+      // console.error("Checkout Error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Checkout Failed",
+        text: "An error occurred during checkout.",
+      });
+    }
   };
 
-  console.log(checkoutData,"my send data");
-  
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search); // Use location.search
+    const tranId = urlParams.get("tran_id");
 
-  try {
-    const response = await axiosPublic.post('/order/checkout', checkoutData);
-    console.log('Checkout response:', response.data);
-
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: 'Checkout Successful',
-      showConfirmButton: false,
-      timer: 1500,
-    });
-
-    for (const item of cart) {
-      await axiosPublic.delete(`/cart/delete/${item._id}`);
-      refetch()
-      navigate("/deshboard")
+    if (tranId) {
+      if (location.pathname.includes("/payment/success")) {
+        // Use location.pathname
+        Swal.fire({
+          icon: "success",
+          title: "Payment Successful!",
+          text: "Thank you for your purchase.",
+        }).then(() => {
+          navigate("/dashboard");
+          refetch(); // Refresh cart data
+        });
+      } else if (location.pathname.includes("/payment/fail")) {
+        // Use location.pathname
+        Swal.fire({
+          icon: "error",
+          title: "Payment Failed",
+          text: "Please try again.",
+        });
+      }
     }
-
-
-  } catch (error) {
-    console.error('Error during checkout:', error);
-    Swal.fire({
-      position: 'top-end',
-      icon: 'error',
-      title: 'Checkout Failed',
-      showConfirmButton: true,
-    });
-  }
-};
+  }, [location, navigate, refetch]);
 
   return (
     <div className="px-4 sm:px-8 lg:px-10 px-5 mt-10">
@@ -210,7 +293,11 @@ const handleCheckout = async () => {
                   </div>
                   <p className="text-lg font-semibold w-[50px] text-right mt-4 sm:mt-0">
                     <span className="hover:text-red-500 transition">
-                      ${calculateItemTotal(cartItems.price, quantities[cartItems._id] || 1)}
+                      $
+                      {calculateItemTotal(
+                        cartItems.price,
+                        quantities[cartItems._id] || 1
+                      )}
                     </span>
                   </p>
                 </div>
@@ -226,7 +313,7 @@ const handleCheckout = async () => {
           </h1>
           <progress className="progress bg-white w-full mb-10"></progress>
           <div className="w-full flex justify-end">
-         <Modal/>
+            <Modal />
           </div>
           <div className="font-semibold">
             <p className="text-lg font-medium mb-3">Order Summary</p>
@@ -264,7 +351,23 @@ const handleCheckout = async () => {
               </label>
             </div>
             {/* Checkout Button */}
-            <button onClick={handleCheckout} className="w-full bg-teal-600 text-white py-3 rounded-lg uppercase font-medium hover:bg-teal-700 transition">
+
+            {/* <button
+              onClick={handleCheckout}
+              className="w-full bg-teal-600 text-white py-3 rounded-lg uppercase font-medium hover:bg-teal-700 transition"
+            >
+              Checkout
+            </button> */}
+            <button
+              onClick={handleCheckout}
+              disabled={cart.length === 0} // Disable when cart is empty
+              className={`w-full py-3 rounded-lg uppercase font-medium transition 
+    ${
+      cart.length === 0
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-teal-600 text-white hover:bg-teal-700"
+    }`}
+            >
               Checkout
             </button>
           </div>

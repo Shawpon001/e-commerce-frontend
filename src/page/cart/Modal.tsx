@@ -1,6 +1,10 @@
-const Modal = () => {
+// import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 
-    const handelAddress = (e: any) => {
+import { data } from "react-router-dom";
+
+const Modal = () => {
+  // const axiosPublic = useAxiosPublic();
+    const handelAddress =  async (e: any) => {
         e.preventDefault();
         const from = e.target;
         const name = from.name.value;
@@ -8,9 +12,22 @@ const Modal = () => {
         const address = from.address.value;
         const phone = from.phone.value;
         const message = from.message.value;
-         const data = {name, email, address , phone , message }
-         console.log(data);
-         
+         const products = {name, email, address , phone , message }
+        //  console.log(data);
+
+        fetch("http://localhost:5000/api/payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(products),
+        })
+          .then((res) => res.json())
+          .then((result) => {
+            window.location.replace(result.url)
+            console.log(result);
+          })
+          .catch((error) => console.error("Error:", error));
+        
+        
       };
     
   return (

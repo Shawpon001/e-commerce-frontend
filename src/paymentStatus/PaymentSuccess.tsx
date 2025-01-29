@@ -1,4 +1,7 @@
+import { useParams } from "react-router-dom";
+
 const PaymentSuccess = () => {
+  const {tranId} = useParams()
   return (
     <div className="py-10">
       <div className="mx-auto py-10 p-8 max-w-md bg-green-100 border border-green-500 rounded-md text-center">
@@ -16,7 +19,7 @@ const PaymentSuccess = () => {
           Thank you for choosing our service! Your payment has been successfully
           processed.
         </div>
-        <h1>Transection Id:12454654</h1>
+        <h1 className="text-teal-600 font-medium ">Transection Id: {tranId}</h1>
         <div className="w-full mt-4 flex justify-center">
           {" "}
           <img

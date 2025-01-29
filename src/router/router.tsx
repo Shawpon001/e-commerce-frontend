@@ -12,6 +12,7 @@ import BookDetails from "../page/book/BookDetails";
 import Cart from "../page/cart/Cart";
 import PrivateRoute from "../components/provider/PrivetRoute";
 import PaymentSuccess from "../paymentStatus/PaymentSuccess";
+import PaymentFailed from "../paymentStatus/PaymentFailed";
 
 const router = createBrowserRouter([
   {
@@ -55,8 +56,12 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path: "/payment/success",
+        path: "/payment/success/:tranId",
         element: <PaymentSuccess/>,
+      },
+      {
+        path: "/payment/fail/:tranId",
+        element: <PaymentFailed/>,
       },
       // login routes
       {
