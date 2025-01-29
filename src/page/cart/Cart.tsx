@@ -238,6 +238,22 @@ const Cart = () => {
     }
   }, [location, navigate, refetch]);
 
+
+
+
+  if (cart.length === 0) { 
+    return (
+        // JSX for empty cart message
+        <div className="text-center h-[40vh] mt-20">
+            <h2 className="text-2xl font-medium">Your cart is empty.</h2>
+            <p className="mt-4">Add items to your cart to continue shopping.</p>
+            <button onClick={() => navigate('/books')} className="mt-6 bg-teal-600 text-white py-2 px-4 rounded-lg hover:bg-teal-700 transition">
+                Go to Products
+            </button>
+        </div>
+    );
+}
+
   return (
     <div className="px-4 sm:px-8 lg:px-10 px-5 mt-10">
       {/* Main container */}
