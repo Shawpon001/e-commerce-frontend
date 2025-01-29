@@ -11,6 +11,7 @@ import Book from "../page/book/Book";
 import BookDetails from "../page/book/BookDetails";
 import Cart from "../page/cart/Cart";
 import PrivateRoute from "../components/provider/PrivetRoute";
+import PaymentSuccess from "../paymentStatus/PaymentSuccess";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/payment/success",
+        element: <PaymentSuccess/>,
       },
       // login routes
       {

@@ -6,11 +6,15 @@ import Swal from "sweetalert2";
 import UseCart from "../../hooks/UseCart";
 import Modal from "./Modal";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 interface DecodedToken {
   email: string;
 }
 const Cart = () => {
   const [cart, refetch] = UseCart();
+  console.log(cart ,);
+   const navigate = useNavigate()
+  
   const axiosPublic = useAxiosPublic();
 
   // State to manage quantity for each cart item
@@ -123,7 +127,7 @@ const handleCheckout = async () => {
 
   try {
     const response = await axiosPublic.post('/order/checkout', checkoutData);
-    console.log('Checkout response:', response);
+    console.log('Checkout response:', response.data);
 
     Swal.fire({
       position: 'top-end',
@@ -132,6 +136,13 @@ const handleCheckout = async () => {
       showConfirmButton: false,
       timer: 1500,
     });
+
+    for (const item of cart) {
+      await axiosPublic.delete(`/cart/delete/${item._id}`);
+      refetch()
+      navigate("/deshboard")
+    }
+
 
   } catch (error) {
     console.error('Error during checkout:', error);
