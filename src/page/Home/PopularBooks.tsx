@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FaDollarSign, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
+import { ThreeDots } from "react-loader-spinner";
 
 export interface Book {
   _id: string;
@@ -16,7 +17,7 @@ export interface Book {
 const PopularBooks = () => {
   const [popularBooks, setPopularBooks] = useState<Book[]>([]);
   console.log(popularBooks);
-
+  const [isLoading, setIsLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
   useEffect(() => {
     const fetchData = async () => {
@@ -26,11 +27,30 @@ const PopularBooks = () => {
         setPopularBooks(response.data.data || []);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, [axiosPublic]);
+
+  if (isLoading) {
+    return (
+      <div className="text-center w-full mx-auto justify-center flex mt-10">
+        <ThreeDots
+          visible={true}
+          height="80"
+          width="80"
+          color="#4fa94d"
+          radius="9"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -42,11 +62,11 @@ const PopularBooks = () => {
           </h2>
           <div className="border-t-2 border-gray-300 w-[25%] md:w-[60%] lg:w-[65%] mt-4"></div>
           <div>
-           <Link to="/books">
-           <button className="btn rounded-3xl bg-[#F65D4E] text-white px-8">
-              View All
-            </button>
-           </Link>
+            <Link to="/books">
+              <button className="btn rounded-3xl bg-[#F65D4E] text-white px-8">
+                View All
+              </button>
+            </Link>
           </div>
         </div>
 
