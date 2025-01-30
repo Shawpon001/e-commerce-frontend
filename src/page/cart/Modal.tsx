@@ -1,7 +1,5 @@
 // import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 
-import { data } from "react-router-dom";
-
 const Modal = () => {
   // const axiosPublic = useAxiosPublic();
     const handelAddress =  async (e: any) => {
@@ -15,7 +13,7 @@ const Modal = () => {
          const products = {name, email, address , phone , message }
         //  console.log(data);
 
-        fetch("http://localhost:5000/api/payment", {
+        fetch("https://book-shop-projcet.vercel.app/api/payment", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(products),
@@ -34,7 +32,7 @@ const Modal = () => {
     <div className="  ">
       <button
         className="btn"
-        onClick={() => document.getElementById("my_modal_5").showModal()}
+        // onClick={() => document.getElementById("my_modal_5").showModal()}
       >
         Add Address
       </button>

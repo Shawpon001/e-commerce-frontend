@@ -8,6 +8,16 @@ import { useEffect, useState } from "react";
 import useAxiosPublic from "../../../axiosPublic/useAxiosPublic";
 import Swal from "sweetalert2";
 import UseCart from "../../../hooks/UseCart";
+
+interface DecodedToken {
+  exp: number; 
+  sub: string; 
+
+}
+
+
+
+
 const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
@@ -20,7 +30,7 @@ const Navbar = () => {
     const token = localStorage.getItem("jwtToken");
     if (token) {
       try {
-        const decodedToken = jwtDecode(token);
+        const decodedToken = jwtDecode <DecodedToken>(token);
         const currentTime = Date.now() / 1000;
         if (decodedToken.exp > currentTime) {
           setIsAuthenticated(true);

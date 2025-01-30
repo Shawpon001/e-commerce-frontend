@@ -21,13 +21,14 @@ const Cart = () => {
   // State to manage quantity for each cart item
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
 
-  useState(() => {
-    const initialQuantities: { [key: string]: number } = {};
-    cart.forEach((item) => {
-      initialQuantities[item._id] = 1;
-    });
-    setQuantities(initialQuantities);
-  }, [cart]);
+ 
+useEffect(() => {
+  const initialQuantities: { [key: string]: number } = {};
+  cart.forEach((item) => {
+    initialQuantities[item._id] = 1;
+  });
+  setQuantities(initialQuantities);
+}, [cart]);
 
   // Handle increase quantity
   const handleIncrease = (id: string) => {
@@ -124,7 +125,7 @@ const Cart = () => {
   //   try {
   //     // const response = await axiosPublic.post('/payment', checkoutData);
   //     // console.log('Checkout response:', response.data);
-  //     // fetch("http://localhost:5000/api/payment", {
+  //     // fetch("https://book-shop-projcet.vercel.app/api/payment", {
   //     //   method: "POST",
   //     //   headers: { "Content-Type": "application/json" },
   //     //   body: JSON.stringify(checkoutData),
@@ -184,7 +185,7 @@ const Cart = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/payment", {
+      const response = await fetch("https://book-shop-projcet.vercel.app/api/payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(checkoutData),

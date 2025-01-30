@@ -17,6 +17,8 @@ import AllUsers from "../components/admin-route/AllUsers";
 import AddBooks from "../components/admin-route/AddBooks";
 import Profile from "../components/sheard/Profile";
 import ManageBook from "../components/admin-route/ManageBook";
+import ManageOrder from "../components/admin-route/ManageOrder";
+import Myorder from "../components/admin-route/user-route/Myorder";
 
 const router = createBrowserRouter([
   {
@@ -97,6 +99,15 @@ const router = createBrowserRouter([
       {
         path:"manage-Books",
         element:<ManageBook/>
+      },
+      {
+        path:"manage-order",
+        element:<ManageOrder/>
+      },
+      // users
+      {
+        path:"order",
+        element:<Myorder/>
       }
     
     

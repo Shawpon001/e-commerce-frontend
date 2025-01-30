@@ -7,7 +7,7 @@ const AddBooks = () => {
   const handleBooks = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
-    const title = form.title.value;
+    const title = form.title.valueOf;
     const author = form.author.value;
     const price = form.price.value;
     const category = form.category.value;

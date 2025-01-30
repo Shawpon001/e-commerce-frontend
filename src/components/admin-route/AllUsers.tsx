@@ -2,8 +2,19 @@ import { useEffect, useState } from "react";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 
+
+interface User {
+  _id: string;
+  name: string;
+  role: string;
+  userStatus: string;
+  id: string;  // Assuming `id` is another unique identifier
+}
+
+
 const AllUsers = () => {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]); // Stat
 //   console.log(users);
   const axiosPublic = useAxiosPublic();
 
@@ -22,10 +33,10 @@ const AllUsers = () => {
   }, [axiosPublic]);
 
   return (
-    <div className="lg:px-24 px-4  w-full mt-5">
+    <div className=" px-4 mt-5">
       <h1 className=" mb-10 text-2xl text-center">All User</h1>
-      <div className="w-full flex justify-center  h-full items-center">
-        <div className="  overflow-x-auto">
+      <div className=" flex justify-center items-center">
+        <div className=" overflow-x-auto">
           <table className="table">
             <thead>
               <tr>
@@ -64,7 +75,7 @@ const AllUsers = () => {
                   </td>
                   <td>{userdata._id}</td>
                   <td>{userdata?.role}</td>
-                  <th className="text-xl hover:text-red-600 cursor-pointer">
+                  <th className="text-xl hover:text-red-600  cursor-pointer">
                     <RiDeleteBin4Line />
                   </th>
                   <th className="text-teal-600"> {userdata?.userStatus} </th>

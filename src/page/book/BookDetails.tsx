@@ -4,6 +4,7 @@ import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
 import "animate.css";
+
 interface Book {
   _id: string;
   title: string;
@@ -13,6 +14,13 @@ interface Book {
   discount: number;
   image: string;
   quantity: number;
+}
+
+interface DecodedToken {
+  email?: string;
+  exp: number;   
+  iat: number;
+
 }
 
 const BookDetails = () => {
@@ -57,14 +65,15 @@ const BookDetails = () => {
           `,
         },
       });
+      return
     }
-    const decodedToken = jwtDecode(token); // Type the decoded token
+    const decodedToken:DecodedToken = jwtDecode(token); // Type the decoded token
     const userEmail = decodedToken?.email;
 
     const cartData = {
-      productId: book._id,
-      title: book.title,
-      price: book.price,
+      productId: book?._id,
+      title: book?.title,
+      price: book?.price,
       image: book?.image,
       userEmail,
     };

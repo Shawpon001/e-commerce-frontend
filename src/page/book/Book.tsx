@@ -11,6 +11,7 @@ export interface Book {
   category: string;
   image: string;
   rating: number;
+  discount?: number; 
 }
 const Book = () => {
   const [popularBooks, setPopularBooks] = useState<Book[]>([]);
@@ -82,6 +83,7 @@ const Book = () => {
             Search
           </button>
           <select
+          defaultValue={"d"}
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
             className="select select-bordered w-full max-w-xs"
@@ -95,9 +97,9 @@ const Book = () => {
         </div>
         {/* secound section */}
         <div className=" w-full">
-          <label className="form-control w-full ">
+          {/* <label className="form-control w-full ">
             <h2 className=" textarea-xl mb-1"> Products Categories </h2>
-            <select className="select w-full  ">
+            <select  className="select w-full  ">
               <option disabled selected>
                 Pick one
               </option>
@@ -107,7 +109,7 @@ const Book = () => {
               <option>Planet of the Apes</option>
               <option>Star Trek</option>
             </select>
-          </label>
+          </label> */}
 
           <div className="flex justify-end mt-5">
             <select

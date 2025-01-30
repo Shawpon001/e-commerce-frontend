@@ -2,7 +2,23 @@ import { CiHeart } from "react-icons/ci";
 import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
-const BookCard = ({ book }) => {
+
+interface Book {
+  _id: string;
+  title: string;
+  author?: string;
+  price?: number;
+  discount?: number;
+  image: string;
+  rating?: number;
+}
+
+interface BookCardProps {
+  book: Book;
+}
+
+
+const BookCard:React.FC<BookCardProps> = ({ book }) => {
 
   return (
     <div className=" mt-16">

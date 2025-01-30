@@ -9,7 +9,7 @@ const Registation = () => {
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const form = e.target as HTMLFormElement;
-      const name = form.name.value;
+      const name = form.name.valueOf;
       const email = form.email.value;
       const password = form.password.value;
     

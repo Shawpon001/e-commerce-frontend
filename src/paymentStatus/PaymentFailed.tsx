@@ -6,7 +6,7 @@ const PaymentFailed = () => {
         <div className="text-2xl text-red-700 font-semibold mb-4">Payment Failed</div>
         <div className="mb-6">
           <img
-            src="/public/remove.png" // Replace with your failure icon URL
+            src="https://i.ibb.co.com/cKhfpnmz/remove.png"
             alt="Failure Icon"
             className="w-16 h-16 mx-auto mb-2"
           />

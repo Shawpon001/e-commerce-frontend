@@ -3,8 +3,14 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+interface FeedbackData {
+  name: string;
+  feedback: string;
+  session: string;
+}
+
 function Feedback() {
- let sliderRef = useRef(null);
+  const sliderRef = useRef<Slider | null>(null);
 
   const settings = {
     dots: true,
@@ -39,12 +45,12 @@ function Feedback() {
   };
 
 
-  const [student, setStudent] = useState([]);
+  const [student, setStudent] = useState<FeedbackData[]>([]);
   // console.log(student);
   
 
   useEffect(() => {
-    fetch("../../../public/feedback.json")
+    fetch("/feedback.json")
       .then((response) => response.json())
       .then((data) => {
         setStudent(data);
@@ -58,7 +64,7 @@ function Feedback() {
       <h2 className="text-center mt-8 mb-5 font-serif text-3xl ">
         Our Clint Feedback
       </h2>
-      <Slider ref={(slider) => (sliderRef = slider)} {...settings}>
+      <Slider ref={sliderRef} {...settings}>
         {student.map((data, index) => (
           <section key={index} className="w-full flex gap-6">
             <div className="w-full">
@@ -68,7 +74,7 @@ function Feedback() {
                     <img
                       src="https://i.ibb.co/tmRS5Lq/premium-photo-1682089789852-e3023ff6df24.jpg"
                       className="w-full h-full object-cover rounded-full"
-                      alt={data.name}
+                      
                     />
                   </div>
                 </div>
@@ -76,9 +82,9 @@ function Feedback() {
                   <h2 className="text-gray-900 text-lg title-font font-medium mb-3">
                     {data.name}
                   </h2>
-                  <p className="leading-relaxed text-base">{data.feedback}</p>
+                  <p className="leading-relaxed text-base">{data?.feedback}</p>
                   <a className="mt-3 text-indigo-500 inline-flex items-center">
-                    Session: {data.session}
+                    Session: {data?.session}
                   </a>
                 </div>
               </div>

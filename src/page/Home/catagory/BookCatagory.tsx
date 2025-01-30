@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
+
+
+interface FeedbackData {
+  categoryName: string;
+  categoryImage: string;
+}
+
 const BookCatagory = () => {
   const settings = {
     dots: true,
@@ -36,11 +43,11 @@ const BookCatagory = () => {
     ],
   };
 
-  const [bookscatagory, setBookscatagory] = useState([]);
+  const [bookscatagory, setBookscatagory] = useState <FeedbackData[]> ([]);
   console.log(bookscatagory);
 
   useEffect(() => {
-    fetch("../../../../public/catagory.json")
+    fetch("/catagory.json")
       .then((response) => response.json())
       .then((data) => {
         setBookscatagory(data);

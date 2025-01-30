@@ -3,8 +3,16 @@ import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin4Line } from "react-icons/ri";
 
+interface Book {
+  id: string;
+  title: string;
+  author: string;
+  category: string;
+  price: number;
+}
 const ManageBook = () => {
-  const [book, setBook] = useState([]);
+  // const [book, setBook] = useState([]);
+  const [book, setBook] = useState<Book[]>([]); 
   console.log(book);
   const axiosPublic = useAxiosPublic();
 
