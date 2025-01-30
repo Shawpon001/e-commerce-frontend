@@ -16,6 +16,7 @@ import PaymentFailed from "../paymentStatus/PaymentFailed";
 import AllUsers from "../components/admin-route/AllUsers";
 import AddBooks from "../components/admin-route/AddBooks";
 import Profile from "../components/sheard/Profile";
+import ManageBook from "../components/admin-route/ManageBook";
 
 const router = createBrowserRouter([
   {
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
       {
         path:"profile",
         element:<Profile/>
+      },
+      {
+        path:"manage-Books",
+        element:<ManageBook/>
       }
     
     

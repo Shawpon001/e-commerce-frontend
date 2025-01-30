@@ -112,8 +112,8 @@ const DashboardLayout = () => {
                 </Link>
               </li>
               <li>
-                <Link to={"/dashboard/manageItem"}>
-                  <TiEdit /> Manage Items
+                <Link to={"manage-Books"}>
+                  <TiEdit /> Manage Book
                 </Link>
               </li>
 
