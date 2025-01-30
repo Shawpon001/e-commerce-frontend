@@ -14,7 +14,7 @@ const Login = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    // Extract email and password
+
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 

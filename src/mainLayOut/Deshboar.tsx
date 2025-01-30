@@ -29,7 +29,7 @@ const DashboardLayout = () => {
 
   return (
     <div>
-        <div className="drawer bg-[#f3edf7] md:drawer-open">
+        <div className="drawer bg-[#ffffff] md:drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col sm:items-start sm:justify-start my-2">
             {/* Page content here */}
@@ -51,7 +51,7 @@ const DashboardLayout = () => {
               </div>
             </div>
 
-            <div className=" mt-5 md:mt-2 ">
+            <div className=" w-full mt-5 md:mt-2 ">
               <Outlet />
             </div>
           </div>

@@ -1,16 +1,56 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Registation = () => {
-  const handelRegister = (e: any) => {
-    e.preventDefault();
-    const from = e.target;
-    const name = from.name.value;
-    const email = from.email.value;
-    const password = from.password.value;
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
-    console.log(name, email, password);
-  };
-
+    const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const form = e.target as HTMLFormElement;
+      const name = form.name.value;
+      const email = form.email.value;
+      const password = form.password.value;
+    
+      const data = { name, email, password };
+      console.log(data);
+    
+      try {
+        // Send the registration data
+        const response = await axiosPublic.post("/auth/register", data);
+        console.log(response);
+    
+        // navigate("/login")
+        if (response.data) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Registration Successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/login")
+        } else {
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "Registration Failed",
+            showConfirmButton: true,
+          });
+        }
+      } catch (err) {
+        console.error("Registration error:", err);
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Registration Failed",
+          text: "An error occurred during registration.",
+          showConfirmButton: true,
+        });
+      }
+    };
+    
   return (
     <div className=" mt-8 lg:px-14 px-5">
       <div className=" md:flex items-center  justify-center">
@@ -19,7 +59,7 @@ const Registation = () => {
           <img src="https://i.ibb.co.com/4RL2PxQ/17133825331.jpg" alt="" />
         </div>
         <div className=" bg-base-200 px-4 py-4 lg:max-w-3xl">
-          <form onSubmit={handelRegister} className="mt-8     gap-6">
+          <form onSubmit={handleRegister} className="mt-8     gap-6">
             <div className=" mb-2 ">
               <label
                 htmlFor="name"
