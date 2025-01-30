@@ -16,15 +16,15 @@ export interface Book {
 
 const PopularBooks = () => {
   const [popularBooks, setPopularBooks] = useState<Book[]>([]);
-  console.log(popularBooks);
+  // console.log(popularBooks);
   const [isLoading, setIsLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axiosPublic.get(`/products/get-book`);
-        // console.log(response.data);
-        setPopularBooks(response.data.data || []);
+        const first8Books = response.data.data.slice(0, 8);
+        setPopularBooks(first8Books || []);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -91,7 +91,7 @@ const PopularBooks = () => {
                     <p className="text-sm text-gray-600 mb-1 font-medium">
                       {book?.author}
                     </p>
-                    <Link to={`/books/${book}`}>
+                    <Link to={`/books/ditales/${book._id}`}>
                       <h2 className="text-lg md:text-xl text-gray-800 font-bold line-clamp-2 hover:text-teal-500">
                         <p>{book?.title}</p>
                       </h2>

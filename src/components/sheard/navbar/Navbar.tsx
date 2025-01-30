@@ -12,8 +12,7 @@ const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
-
-  const [cart, refetch] = UseCart();
+  const [cart] = UseCart();
   
    
 

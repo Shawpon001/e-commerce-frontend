@@ -1,16 +1,30 @@
 import { FaBagShopping, FaUsers } from "react-icons/fa6";
 import { IoMdAddCircleOutline, IoMdContacts } from "react-icons/io";
 import {
-  MdDashboard,
   MdDashboardCustomize,
   MdHome,
-  MdMenu,
   MdOutlineBorderColor,
 } from "react-icons/md";
 import { TiEdit } from "react-icons/ti";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
+
 
 const DashboardLayout = () => {
+
+  const token = localStorage.getItem("jwtToken");
+  let isAdmin = false;
+
+  if (token) {
+    try {
+      // Decode token or fetch user role from your API
+      const user = JSON.parse(atob(token.split(".")[1]));
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      isAdmin = user?.role === "admin"; 
+    } catch (error) {
+      console.error("Invalid token:", error);
+    }
+  }
+
 
 
   return (
@@ -47,10 +61,10 @@ const DashboardLayout = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu p-4 w-52 bg-[#a89dacc5]  min-h-full  text-base-content">
+            <ul className="menu p-4 w-52 bg-[#b9b3bbc5]  min-h-full  text-base-content">
               {/* Sidebar content here */}
               <li>
-                <Link className="flex justify-start gap-10" to={"/dashboard"}>
+                <Link className="flex justify-start gap-10" to={"/"}>
                   <img
                     src="https://i.ibb.co.com/VmX711W/images-removebg-preview.png"
                     className="h-[20px] w-full object-cover"
@@ -63,23 +77,38 @@ const DashboardLayout = () => {
               </li>
               <hr className="mb-2 mt-1" />
               <li>
-                <Link to={"/dashboard"}>
+                {/* <Link to={"/deshboard"}>
                   <MdDashboard /> Dashboard{" "}
-                </Link>
+                </Link> */}
+
+                <NavLink
+                        to="/deshboard"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-teal-600  nav-link font-semibold block text-[15px]"
+                            : "hover:text-[#dfdbecd7] text-gray-700 font-semibold block text-[15px]"
+                        }
+                      >
+                        Deshboard
+                      </NavLink>
+
+
               </li>
+              {isAdmin && (
               <li>
-                <Link to={"/dashboard/alluser"}>
+                <Link to={"all-user"}>
                   <FaUsers /> All Users
                 </Link>
               </li>
+            )}
               <li>
                 <Link to={"/dashboard/managebooking"}>
                   <FaBagShopping /> Manage Booking
                 </Link>
               </li>
               <li>
-                <Link to={"/dashboard/addMenu"}>
-                  <IoMdAddCircleOutline /> Add Menu
+                <Link to={"add-book"}>
+                  <IoMdAddCircleOutline /> Add Book
                 </Link>
               </li>
               <li>
@@ -95,19 +124,19 @@ const DashboardLayout = () => {
                 </Link>
               </li>
               <li>
-                <Link to={"/menu"}>
-                  <MdMenu /> Menu
+                <Link to={"profile"}>
+                  <FaUsers/> Profile
                 </Link>
               </li>
               <li>
-                <Link to={"/order-Tracking"}>
+                <Link to={"/deshboard"}>
                   <MdOutlineBorderColor /> Order Tracking
                 </Link>
               </li>
               <li>
-                <Link to={"/order-Tracking"}>
+                <NavLink to="/deshboard">
                   <IoMdContacts /> Customer Support
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </div>

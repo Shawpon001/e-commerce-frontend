@@ -14,19 +14,19 @@ export interface Book {
 }
 const Book = () => {
   const [popularBooks, setPopularBooks] = useState<Book[]>([]);
+  // console.log(popularBooks.length);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [priceFilter, setPriceFilter] = useState<string>("");
   const axiosPublic = useAxiosPublic();
-
-  // Fetch books based on filters
+  // Fetch books on filters
   const fetchBooks = async () => {
     try {
       const response = await axiosPublic.get("/products/get-book", {
         params: {
           searchTerm,
           category: selectedCategory,
-          priceFilter, // Send price filter here
+          priceFilter,
         },
       });
 
@@ -36,14 +36,14 @@ const Book = () => {
     }
   };
 
-  // Trigger book fetch when filters change
   useEffect(() => {
     fetchBooks();
-  }, [searchTerm, selectedCategory, priceFilter]); // Dependencies will trigger fetch
+  }, [searchTerm, selectedCategory, priceFilter]);
 
   const handleSearch = () => {
-    fetchBooks(); // Call fetchBooks when search button is clicked
+    fetchBooks(); 
   };
+
 
   if (!popularBooks) {
     return <div>Loading...</div>;

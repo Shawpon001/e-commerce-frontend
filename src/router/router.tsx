@@ -13,6 +13,9 @@ import Cart from "../page/cart/Cart";
 import PrivateRoute from "../components/provider/PrivetRoute";
 import PaymentSuccess from "../paymentStatus/PaymentSuccess";
 import PaymentFailed from "../paymentStatus/PaymentFailed";
+import AllUsers from "../components/admin-route/AllUsers";
+import AddBooks from "../components/admin-route/AddBooks";
+import Profile from "../components/sheard/Profile";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path:"books/ditales/:id",
-        element: <PrivateRoute> <BookDetails/> </PrivateRoute>
+        element:<BookDetails/> 
       },
       {
         path: "/about",
@@ -53,7 +56,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: <PrivateRoute>  <Cart /></PrivateRoute>
       },
       {
         path: "/payment/success/:tranId",
@@ -77,6 +80,22 @@ const router = createBrowserRouter([
   {
     path: "/deshboard",
     element: <PrivateRoute><DashboardLayout /></PrivateRoute> ,
+    children:[
+      {
+        path:"all-user",
+        element:<AllUsers/>
+      },
+      {
+        path:"add-book",
+        element:<AddBooks/>
+      },
+      {
+        path:"profile",
+        element:<Profile/>
+      }
+    
+    
+    ]
   },
 ]);
 

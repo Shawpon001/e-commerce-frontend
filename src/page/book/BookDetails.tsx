@@ -3,7 +3,7 @@ import { data, useParams } from "react-router-dom";
 import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
-
+import "animate.css";
 interface Book {
   _id: string;
   title: string;
@@ -35,18 +35,33 @@ const BookDetails = () => {
     fetchBookDetails();
   }, [_id, axiosPublic]);
 
-
   const addToCart = async () => {
     const token = localStorage.getItem("jwtToken");
 
     if (!token) {
-      alert("Please login to add to cart.");
-      return;
+      Swal.fire({
+        title: "please Login",
+        icon: "info",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `,
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `,
+        },
+      });
     }
-    const decodedToken =jwtDecode(token); // Type the decoded token
-      const userEmail = decodedToken?.email;
-      
-      const cartData = {
+    const decodedToken = jwtDecode(token); // Type the decoded token
+    const userEmail = decodedToken?.email;
+
+    const cartData = {
       productId: book._id,
       title: book.title,
       price: book.price,
@@ -54,7 +69,7 @@ const BookDetails = () => {
       userEmail,
     };
     console.log(cartData);
-    
+
     try {
       const response = await axiosPublic.post("/cart/create-cart", cartData);
       if (response.data) {
@@ -63,7 +78,7 @@ const BookDetails = () => {
           icon: "success",
           title: "Product added to cart successfully!",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
       } else {
         alert("Failed to add product to cart.");
@@ -72,13 +87,11 @@ const BookDetails = () => {
       console.error("Error adding product to cart:", error);
       alert("Error adding product to cart.");
     }
-  
-  }
+  };
 
   if (!book) {
     return <div>Loading...</div>;
   }
-
 
   return (
     <div className="w-full mt-10 px-5 md:px-14 px-5">
@@ -103,20 +116,25 @@ const BookDetails = () => {
             <p className="text-2xl text-teal-600 font-semibold mb-5">
               $ {book.price}
               <span className="text-red-500 ml-4 line-through">
-                
                 ${book.discount}
               </span>
             </p>
 
             {/* Quantity Section */}
             <div className=" mb-1">
-              <p className="text-lg font-medium mb-7 text-gray-800"> Books {book.quantity} pis   Aviable </p>
+              <p className="text-lg font-medium mb-7 text-gray-800">
+                {" "}
+                Books {book.quantity} pis Aviable{" "}
+              </p>
             </div>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-5">
-              <button onClick={addToCart} className="bg-[#071214] text-white px-5 py-3 rounded-lg w-full sm:w-auto shadow-md hover:bg-[#19bcd1] transition">
-              Add to Cart
+              <button
+                onClick={addToCart}
+                className="bg-[#071214] text-white px-5 py-3 rounded-lg w-full sm:w-auto shadow-md hover:bg-[#19bcd1] transition"
+              >
+                Add to Cart
               </button>
               <button className="bg-teal-600 text-white px-5 py-3 rounded-lg w-full sm:w-auto shadow-md hover:bg-orange-600 transition">
                 Add to wishlist

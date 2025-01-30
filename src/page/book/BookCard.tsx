@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const BookCard = ({ book }) => {
 
-
   return (
     <div className=" mt-16">
       <div className="group border border-gray-300 relative block overflow-hidden">
@@ -28,7 +27,7 @@ const BookCard = ({ book }) => {
             </span>
           </p>
 
-          <Link to={`ditales/${book._id}`}>
+          <Link to={`/books/ditales/${book._id}`}>
             <h3 className="mt-1.5 hover:text-teal-600 cursor-pointer hover:underline text-lg font-medium text-gray-900">
               {book.title}
             </h3>
