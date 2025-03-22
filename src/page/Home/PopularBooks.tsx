@@ -3,7 +3,8 @@ import { FaDollarSign, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 import { ThreeDots } from "react-loader-spinner";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 export interface Book {
   _id: string;
   title: string;
@@ -15,6 +16,11 @@ export interface Book {
 }
 
 const PopularBooks = () => {
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   const [popularBooks, setPopularBooks] = useState<Book[]>([]);
   // console.log(popularBooks);
   const [isLoading, setIsLoading] = useState(true);
@@ -74,7 +80,11 @@ const PopularBooks = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 p-2">
           <div className="col-span-1 lg:col-span-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {popularBooks?.map((book) => (
-              <div key={book._id} className="col-span-1">
+              <div data-aos="fade-up"
+            data-aos-anchor-placement="top-bottom"
+              data-aos-offset="300"
+              
+              key={book._id} className="col-span-1">
                 <div className="transition h-fit duration-500 w-full font-sans overflow-hidden mx-auto mt-4 px-4 pt-4">
                   {/* Full Height Image */}
                   <div className="relative group">

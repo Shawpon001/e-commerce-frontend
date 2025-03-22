@@ -1,5 +1,3 @@
-"use client";
-
 import { FaHelicopter, FaStar } from "react-icons/fa6";
 
 

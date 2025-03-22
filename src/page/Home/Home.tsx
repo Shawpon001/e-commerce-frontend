@@ -1,6 +1,7 @@
 import Banner from "../../components/banner/Banner";
 import Advertise from "./Advertise";
 import BookCatagory from "./catagory/BookCatagory";
+import ChildBook from "./ChildBook";
 import Discount from "./Discount";
 import PopularBooks from "./PopularBooks";
 import RelizonBook from "./RelizonBook";
@@ -15,6 +16,7 @@ const Home = () => {
         <BookCatagory />
         <PopularBooks />
         <RelizonBook/>
+        <ChildBook/>
         <Discount />
         <Advertise />
         <Feedback />

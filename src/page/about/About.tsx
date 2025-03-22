@@ -16,7 +16,7 @@ const About = () => {
 
                 </div>
             </div>
-            <div className="container mx-auto px-4 py-12 bg-white shadow-lg rounded-lg mt-8">
+            <div className="container mx-auto px-4 py-12  rounded-lg mt-8">
                 <h2 className="text-3xl font-bold text-center mb-8">
                     How It Works
                     <span className="text-base font-normal block">(and how your purchases help bookstores)</span>

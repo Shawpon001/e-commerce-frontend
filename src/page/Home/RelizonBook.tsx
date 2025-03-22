@@ -86,7 +86,7 @@ const RelizonBook = () => {
   ];
 
   return (
-    <div className="bg-gray-200 mb-20 px-2 py-8">
+    <div className=" mb-20 bg-[#f7f6f6] px-2 py-8">
       <div className="flex text-2xl px-4 mb-10 justify-between items-center">
         <h2 className="text-xl lg:text-4xl font-semibold text-black">
           Religious Book 📖
@@ -97,12 +97,11 @@ const RelizonBook = () => {
           </button>
         </Link>{" "}
       </div>
-
       <div className="slider-container px-4">
         <Slider {...settings}>
           {fakeData.map((data) => (
             <div key={data.id} className="p-2">
-              <div className="bg-white rounded-xl overflow-hidden shadow-lg h-full flex flex-col">
+              <div className=" rounded-xl overflow-hidden shadow-lg h-full flex flex-col">
                 {/* Image Section */}
                 <img
                   className="w-full h-48 object-contain p-4"
