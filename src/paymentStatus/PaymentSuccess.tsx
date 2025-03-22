@@ -10,7 +10,7 @@ const PaymentSuccess = () => {
         </div>
         <div className="mb-6">
           <img
-            src="https://i.ibb.co.com/vCZKYLj5/checked.png" 
+            src="https://i.ibb.co.com/R4NqFRf6/success-icon-2048x2048-8woikx05.png" 
             alt="Success Icon"
             className="w-16 h-16 mx-auto mb-2"
           />

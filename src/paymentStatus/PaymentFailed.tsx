@@ -6,7 +6,7 @@ const PaymentFailed = () => {
         <div className="text-2xl text-red-700 font-semibold mb-4">Payment Failed</div>
         <div className="mb-6">
           <img
-            src="https://i.ibb.co.com/cKhfpnmz/remove.png"
+            src="https://i.ibb.co.com/WpkrB7CY/payment-fail-icon-300x300.png"
             alt="Failure Icon"
             className="w-16 h-16 mx-auto mb-2"
           />

@@ -19,12 +19,14 @@ import Profile from "../components/sheard/Profile";
 import ManageBook from "../components/admin-route/ManageBook";
 import ManageOrder from "../components/admin-route/ManageOrder";
 import Myorder from "../components/admin-route/user-route/Myorder";
+import Error from "../components/sheard/navbar/Error";
+import BlogDetails from "../page/bloge/BlogDetails";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayOut />,
-    //   errorElement: <Error />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -52,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/bloge",
         element: <Bloge />,
+      },
+      {
+        path: "bloge/blogdetails/:id",
+        element: <BlogDetails />,
       },
       {
         path: "/contact",

@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 import UsePayment from "../../../hooks/usepayment";
-
-
 const MyOrder = () => {
     const [payments] = UsePayment();
 
@@ -22,7 +22,7 @@ const MyOrder = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {payments?.map((payment, index) => (
+                        {payments?.map((payment: { _id: Key | null | undefined; transaction: string | number | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; userEmail: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; totalAmount: number; paidStatus: any; items: string | any[]; }, index: number)=> (
                             <tr key={payment._id} className="text-center hover:bg-gray-100">
                                 <td className="border p-2">{index + 1}</td>
                                 <td className="border p-2">{payment.transaction}</td>

@@ -71,19 +71,6 @@ const DashboardLayout = () => {
               </Link>
             </li>
             <hr className="mb-2 mt-1" />
-            <li>
-              <NavLink
-                to="/deshboard"
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-teal-600  nav-link font-semibold block text-[15px]"
-                    : "hover:text-[#dfdbecd7] text-gray-700 font-semibold block text-[15px]"
-                }
-              >
-                Deshboard
-              </NavLink>
-            </li>
-
             {isAdmin && (
               <li>
                 <Link to={"all-user"}>
@@ -115,7 +102,7 @@ const DashboardLayout = () => {
                 </Link>
               </li>
             )}
-            <li>
+            <li className="mt-4">
               <Link to="order">
                 <FaBagShopping /> My Order
               </Link>

@@ -125,7 +125,7 @@ useEffect(() => {
   //   try {
   //     // const response = await axiosPublic.post('/payment', checkoutData);
   //     // console.log('Checkout response:', response.data);
-  //     // fetch("https://book-shop-projcet.vercel.app/api/payment", {
+  //     // fetch("http://localhost:5000/api/payment", {
   //     //   method: "POST",
   //     //   headers: { "Content-Type": "application/json" },
   //     //   body: JSON.stringify(checkoutData),
@@ -185,7 +185,7 @@ useEffect(() => {
     };
 
     try {
-      const response = await fetch("https://book-shop-projcet.vercel.app/api/payment", {
+      const response = await fetch("http://localhost:5000/api/payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(checkoutData),

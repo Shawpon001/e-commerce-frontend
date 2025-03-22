@@ -1,18 +1,42 @@
 import { FaEdit } from "react-icons/fa";
-import { IoCloseSharp } from "react-icons/io5";
+import ProfileUpdate from "./profileUpdate";
+import { useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Profile = () => {
+  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
+
+  const logoutHandler = async () => {
+    try {
+      await axiosPublic.post("/auth/logout");
+      localStorage.removeItem("jwtToken");
+      // setIsAuthenticated(false);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User Logout",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
-    <div className="lg:w-[800px] w-full lg:px-14 px-4 ">
-      <div className="flex justify-between items-center">
-        <h1 className=" lg:text-3xl text-xl my-5 lg:ml-8 ml-4 md:ml-7 font-semibold">
-          {" "}
-          Personal Information:{" "}
-        </h1>
+    <div className="min-h-screen bg-gray-100 flex flex-col">
+      {/* Navbar */}
+      <nav className="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+        <h1 className="text-xl font-bold">Profile</h1>
         <button
-          className="btn bg-[#f3f03fdc] border-none  md:[12rem] lg:mr-8 mr-[2rem]  ml-[6rem] "
+          className="btn bg-teal-500 border-none  md:[12rem] lg:mr-8 mr-[2rem]  ml-[6rem] "
           onClick={() => {
-            const modal = document.getElementById("my_modal_5") as HTMLDialogElement | null;
+            const modal = document.getElementById(
+              "my_modal_5"
+            ) as HTMLDialogElement | null;
             if (modal) {
               modal.showModal();
             }
@@ -21,82 +45,64 @@ const Profile = () => {
           <span>
             <FaEdit className="text-xl" />
           </span>
-          Info
+          Edit
         </button>
-      </div>
-      {/* start */}
-      <div className="lg:flex xl:flex md:flex flex-row cursor-pointer gap-5  mb-5 px-7  justify-center ">
-        <div className=" relative">
-          <img
-            src="https://i.ibb.co.com/tmRS5Lq/premium-photo-1682089789852-e3023ff6df24.jpg"
-            alt=""
-            className="md:w-[400px] w-full object-cover  md:h-[270px]  "
-          />
-        </div>
-
-        <div className=" w-full lg:w-[400px] xl:w-full px-6 bg-gray-200 lg:mt-0 md:mt-0 mt-5">
-          <div className="">
-            <h1 className="text-2xl font-bold "> name </h1>
-            <dialog
-              id="my_modal_5"
-              className="modal modal-bottom sm:modal-middle"
-            >
-              <div className="modal-box">
-                <div className=" px-4 py-3 rounded-md ">
-                  <div className="flex justify-between items-center">
-                    <h1 className="text-2xl font-semibold">
-                      {" "}
-                      Update Information{" "}
-                    </h1>
-                    <div className="modal-action">
-                      <form method="dialog">
-                        {/* if there is a button in form, it will close the modal */}
-                        <button className="text-2xl ">
-                          <IoCloseSharp />
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-                  <form>
-                    <div className="mt-4 xl:grid-cols-2 lg:grid-cols-2 grid-cols-2  grid text-center items-center justify-center gap-10 ">
-                      <div className="form-control">
-                        <input
-                          type="text"
-                          name="name"
-                          placeholder="Name"
-                          className="input input-bordered"
-                          required
-                        />
-                      </div>
-
-                      <div className="form-control">
-                        <input
-                          name="photo"
-                          type="file"
-                          placeholder="Photo"
-                          className="file-input file-input-bordered file-input-primary w-full"
-                        />
-                      </div>
-
-                      <div className="form-control">
-                        <textarea
-                          className="textarea textarea-bordered"
-                          name="description"
-                          placeholder="Bio"
-                        ></textarea>
-                      </div>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className=" mt-4 font-semibold px-2 hover:bg-yellow-500   rounded-lg bg-yellow-400 w-[180px] h-12 mb-6 "
-                    >
-                      Update Information
-                    </button>
-                  </form>
-                </div>
+      </nav>
+      <ProfileUpdate />
+      <div className="flex items-center justify-center p-6 flex-1">
+        <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-4xl flex flex-col md:flex-row gap-6">
+          {/* Profile Card */}
+          <div className="bg-gray-50 p-6 rounded-lg flex flex-col items-center w-full md:w-1/3 text-center">
+            <img
+              className="w-32 h-32 rounded-full border-4 border-white shadow-md"
+              src="https://randomuser.me/api/portraits/men/10.jpg"
+              alt="Profile"
+            />
+            <h2 className="mt-4 text-xl font-semibold">Hanna Gover</h2>
+            <p className="text-gray-500 text-sm">Accounts Manager, Amix Corp</p>
+            <div className="mt-4 flex gap-6 text-gray-600">
+              <div className="flex items-center gap-1">
+                <span className="text-lg">👥</span> 254
               </div>
-            </dialog>
+              <div className="flex items-center gap-1">
+                <span className="text-lg">📧</span> 54
+              </div>
+            </div>
+            <button
+              onClick={logoutHandler}
+              className=" mt-10 text-teal-500 btn btn-outline"
+            >
+              {" "}
+              LogOut
+            </button>
+          </div>
+          {/* Profile Details */}
+          <div className="flex-1 p-6 bg-white rounded-lg">
+            <h2 className="text-xl font-semibold border-b pb-2">
+              Profile Details
+            </h2>
+            <div className="mt-4 space-y-4">
+              <div>
+                <p className="text-gray-500 text-sm">Full Name</p>
+                <p className="font-medium">Johnathan Doe</p>
+              </div>
+              <div>
+                <p className="text-gray-500 text-sm">Email</p>
+                <p className="font-medium text-blue-600">johnathan@admin.com</p>
+              </div>
+              <div>
+                <p className="text-gray-500 text-sm">Password</p>
+                <p className="font-medium">********</p>
+              </div>
+              <div>
+                <p className="text-gray-500 text-sm">Phone No</p>
+                <p className="font-medium">123 456 7890</p>
+              </div>
+              <div>
+                <p className="text-gray-500 text-sm">Message</p>
+                <p className="font-medium"> i am hriody </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

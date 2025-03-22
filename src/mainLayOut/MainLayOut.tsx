@@ -6,7 +6,7 @@ const MainLayOut = () => {
   return (
     <div className='w-full 2xl:w-[1440px] 2xl:mx-auto overflow-x-hidden'>
       <Navbar />
-      <div className="">
+      <div className="pt-42">
         <Outlet />
       </div>
       <Footer />

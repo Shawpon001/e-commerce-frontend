@@ -13,7 +13,7 @@ const Modal = () => {
          const products = {name, email, address , phone , message }
         //  console.log(data);
 
-        fetch("https://book-shop-projcet.vercel.app/api/payment", {
+        fetch("http://localhost:5000/api/payment", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(products),

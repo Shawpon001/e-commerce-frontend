@@ -54,7 +54,7 @@ const PopularBooks = () => {
 
   return (
     <div>
-      <div className="my-4 md:my-8 lg:mt-20 lg:mb-20 container mx-auto">
+      <div className="my-4 md:my-8 lg:mt-20 lg:mb-20 ">
         {/* Header */}
         <div className="flex px-4 items-center justify-between mb-8">
           <h2 className="text-xl lg:text-4xl font-semibold text-black">
