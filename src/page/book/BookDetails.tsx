@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
 import "animate.css";
 import ReviewsRatings from "./BookRevew";
-import RelizonBook from "../Home/RelizonBook";
+// import RelizonBook from "../Home/RelizonBook";
 import InfoSection from "./InfoSection";
 
 interface Book {
@@ -155,7 +155,7 @@ const BookDetails = () => {
       {/* Reviews, Related Books & Info Section */}
       <div className="mt-10 space-y-10">
         <ReviewsRatings />
-        <RelizonBook />
+        {/* <RelizonBook /> */}
         <InfoSection />
       </div>
     </div>

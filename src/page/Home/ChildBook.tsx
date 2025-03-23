@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import { IBook } from "./PopularBooks";
 import { FaStar } from "react-icons/fa6";
 import Loading from "../../components/sheard/Loading";
+import useAddToCart from "../../hooks/addToCart";
 
 const ChildBook = ({ religiousBooks }: { religiousBooks: IBook[] }) => {
-  console.log(religiousBooks, "dataa");
+  // console.log(religiousBooks, "dataa");
+  const addToCart = useAddToCart();
 
   const settings = {
     dots: true,
@@ -93,7 +95,7 @@ const ChildBook = ({ religiousBooks }: { religiousBooks: IBook[] }) => {
 
                 {/* Button Section */}
                 <div className="px-4 pb-4">
-                  <button className="bg-teal-500 hover:bg-blue-700 text-white font-bold py-2 w-full rounded">
+                  <button onClick={() => addToCart(data)} className="bg-teal-500 hover:bg-blue-700 text-white font-bold py-2 w-full rounded">
                     ADD TO CART
                   </button>
                 </div>
