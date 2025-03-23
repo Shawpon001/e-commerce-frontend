@@ -21,7 +21,7 @@ interface BookCardProps {
 const BookCard:React.FC<BookCardProps> = ({ book }) => {
 
   return (
-    <div className=" mt-16">
+    <div className="">
       <div className="group border border-gray-300 relative block overflow-hidden">
         <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
           <span className="sr-only">Wishlist</span>
@@ -38,7 +38,7 @@ const BookCard:React.FC<BookCardProps> = ({ book }) => {
           <h3 className=" text-teal-600 mb-1"> {book.author} </h3>
           <p className="text-gray-700">
             ${book.price}
-            <span className="text-gray-400 ml-3 text-red-500 line-through">
+            <span className=" ml-3 text-red-500 line-through">
               ${book.discount}
             </span>
           </p>

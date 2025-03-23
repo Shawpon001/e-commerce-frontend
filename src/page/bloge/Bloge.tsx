@@ -35,7 +35,34 @@ const Bloge = () => {
   }
 
   return (
-    <div className="w-full md:px-10 px-4 md:pt-10">
+    <div className="w-full md:px-10 px-4 ">
+      <div className="relative w-full bg-white ">
+        {/* Banner Image */}
+        <div className="w-full h-60 sm:h-80 md:h-64 relative">
+          <img
+            src="https://i.ibb.co.com/QjXHqBQk/IMG-0324.jpg"
+            alt="Bookshelf"
+            className="rounded-b-lg h-[250px] w-full "
+          />
+        </div>
+
+        {/* Profile & Title */}
+        <div className="flex items-center space-x-4 px-6 mt-[-30px] sm:mt-[-40px]">
+          {/* Profile Picture */}
+          <div className="w-16 h-16 sm:w-20 z-20 sm:h-20 rounded-full border-4 border-white overflow-hidden shadow-lg">
+            <img
+              src="https://i.ibb.co.com/Xrrw66mQ/image-1.png"
+              alt="Profile"
+              width={80}
+              height={80}
+              className="object-cover"
+            />
+          </div>
+        </div>
+        <h1 className="text-2xl pt-10 mb-8 sm:text-3xl font-semibold text-gray-800">
+          The Book House Blog
+        </h1>
+      </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 items-start">
         {blogs?.map((blog) => (
           <div

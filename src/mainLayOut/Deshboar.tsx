@@ -16,7 +16,6 @@ const DashboardLayout = () => {
     try {
       // Decode token or fetch user role from your API
       const user = JSON.parse(atob(token.split(".")[1]));
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       isAdmin = user?.role === "admin";
     } catch (error) {
       console.error("Invalid token:", error);
@@ -25,7 +24,7 @@ const DashboardLayout = () => {
 
   return (
     <div>
-      <div className="drawer bg-[#ffffff] md:drawer-open">
+      <div className="drawer bg-[#f8f8f8] md:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col sm:items-start sm:justify-start my-2">
           {/* Page content here */}
@@ -51,6 +50,7 @@ const DashboardLayout = () => {
           </div>
           <div className=" w-full mt-5 md:mt-2 ">
             <Outlet />
+            
           </div>
         </div>
         <div className="drawer-side ">
@@ -59,7 +59,7 @@ const DashboardLayout = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-52 bg-[#b9b3bbc5]  min-h-full  text-base-content">
+          <ul className="menu p-4 w-52 bg-cyan-300  min-h-full  text-base-content">
             {/* Sidebar content here */}
             <li>
               <Link className="flex justify-start gap-10" to={"/"}>

@@ -21,14 +21,13 @@ const Cart = () => {
   // State to manage quantity for each cart item
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
 
- 
-useEffect(() => {
-  const initialQuantities: { [key: string]: number } = {};
-  cart.forEach((item) => {
-    initialQuantities[item._id] = 1;
-  });
-  setQuantities(initialQuantities);
-}, [cart]);
+  useEffect(() => {
+    const initialQuantities: { [key: string]: number } = {};
+    cart.forEach((item) => {
+      initialQuantities[item._id] = 1;
+    });
+    setQuantities(initialQuantities);
+  }, [cart]);
 
   // Handle increase quantity
   const handleIncrease = (id: string) => {
@@ -237,30 +236,33 @@ useEffect(() => {
         });
       }
     }
-  }, [location, navigate, refetch]);
+  }, [navigate, refetch]);
 
-  if (cart.length === 0) { 
+  if (cart.length === 0) {
     return (
-        // JSX for empty cart message
-        <div className="text-center h-[40vh] mt-20">
-            <h2 className="text-2xl font-medium">Your cart is empty!!</h2>
-            <p className="mt-4">Add items to your cart to continue shopping.</p>
-            <button onClick={() => navigate('/books')} className="mt-6 bg-teal-600 text-white py-2 px-4 rounded-lg hover:bg-teal-700 transition">
-                Go to Products
-            </button>
-        </div>
+      // JSX for empty cart message
+      <div className="text-center h-[40vh] mt-20">
+        <h2 className="text-2xl font-medium">Your cart is empty!!</h2>
+        <p className="mt-4">Add items to your cart to continue shopping.</p>
+        <button
+          onClick={() => navigate("/books")}
+          className="mt-6 bg-teal-600 text-white py-2 px-4 rounded-lg hover:bg-teal-700 transition"
+        >
+          Go to Products
+        </button>
+      </div>
     );
-}
+  }
 
   return (
-    <div className="px-4 sm:px-8 lg:px-10 px-5 mt-10">
+    <div className="px-4 sm:px-8 lg:px-10  mt-10">
       {/* Main container */}
       <div className="flex flex-col lg:flex-row w-full gap-8 lg:gap-24 justify-center">
         {/* Cart items */}
         <div className="w-full lg:w-2/3">
           <div className="flex justify-between items-center mb-5 px-2">
             <h2 className="text-xl lg:text-2xl font-medium">Shopping Cart</h2>
-            <p className="text-sm lg:text-base text-xl">{cart.length} Item</p>
+            <p className="text-sm lg:text-base ">{cart.length} Item</p>
           </div>
           <div className="border border-gray-200 rounded-lg overflow-hidden">
             {cart.map((cartItems) => (
@@ -278,7 +280,7 @@ useEffect(() => {
                 <div className="flex flex-col sm:flex-row justify-between w-full">
                   <div className="flex flex-col justify-between">
                     <h3 className="text-lg font-semibold">{cartItems.title}</h3>
-
+                    <p> online</p>
                     <div className="flex items-center gap-4 mt-4 justify-between">
                       <div className="flex items-center gap-4">
                         <button
