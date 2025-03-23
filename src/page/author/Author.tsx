@@ -3,6 +3,8 @@ import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 import { IBook } from "../Home/PopularBooks";
 import Loading from "../../components/sheard/Loading";
 import { FaPencil } from "react-icons/fa6";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Author = () => {
   const [popularBooks, setPopularBooks] = useState<IBook[]>([]);
@@ -11,6 +13,10 @@ const Author = () => {
   const authorsPerPage = 20;
 
   const axiosPublic = useAxiosPublic();
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,6 +83,8 @@ const Author = () => {
         <div className="grid grid-cols-1 py-10 md:grid-cols-4 gap-2">
           {currentAuthors.map((author, index) => (
             <div
+              data-aos="fade-up"
+              data-aos-duration="3000"
               key={index}
               className="p-2 border flex flex-col items-center rounded-lg shadow-md transition-all cursor-pointer"
             >

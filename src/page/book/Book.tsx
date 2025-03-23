@@ -5,7 +5,6 @@ import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 import Loading from "../../components/sheard/Loading";
 import { IBook } from "../Home/PopularBooks";
 
-
 const Book = () => {
   const [popularBooks, setPopularBooks] = useState<IBook[]>([]);
   // console.log(popularBooks.length);
@@ -82,8 +81,11 @@ const Book = () => {
             <option disabled selected>
               Select Category
             </option>
-            <option>Han Solo</option>
-            <option>Greedo</option>
+
+            <option>All Book</option>
+            <option value="Fiction">Popular Book</option>
+            <option value="Religious">Religous Book</option>
+            <option value="Children">Child Book</option>
           </select>
 
           {/* secound section */}

@@ -78,7 +78,7 @@ const RelizonBook = ({ religiousBooks }: { religiousBooks: IBook[] }) => {
                   <p className="text-gray-600 text-sm">
                     <strong>author:</strong> {data.author}
                   </p>
-                  <p className="font-bold text-xl mb-1">{data.title}</p>
+                  <Link to={`/books/ditales/${data._id}`} className="font-bold hover:underline text-xl mb-1">{data.title}</Link>
                   <div className="flex justify-between mb-2 mt-2 ">
                     <p className="text-teal-500 text-sm">
                       <strong>Price:</strong> {data.price}
