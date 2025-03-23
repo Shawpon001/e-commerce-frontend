@@ -2,8 +2,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
+import { IBook } from "./PopularBooks";
+import { FaStar } from "react-icons/fa6";
+import Loading from "../../components/sheard/Loading";
 
-const RelizonBook = () => {
+const RelizonBook = ({ religiousBooks }: { religiousBooks: IBook[] }) => {
+  // console.log(religiousBooks, "dataa");
+
   const settings = {
     dots: true,
     infinite: true,
@@ -34,101 +39,61 @@ const RelizonBook = () => {
     ],
   };
 
-  const fakeData = [
-    {
-      id: 1,
-      name: "John Doe",
-      age: 30,
-      engine: "V8",
-      department: "Engineering",
-      branch: "Mechanical",
-      image:
-        "https://i.ibb.co.com/FRGWf97/book-39032025-02-01-1738385616-1.jpg",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      age: 25,
-      engine: "V6",
-      department: "Design",
-      branch: "Electrical",
-      image:
-        "https://i.ibb.co.com/FRGWf97/book-39032025-02-01-1738385616-1.jpg",
-    },
-    {
-      id: 3,
-      name: "Alice Johnson",
-      age: 28,
-      engine: "V12",
-      department: "Production",
-      branch: "Automotive",
-      image:
-        "https://i.ibb.co.com/FRGWf97/book-39032025-02-01-1738385616-1.jpg",
-    },
-    {
-      id: 4,
-      name: "Bob Brown",
-      age: 35,
-      engine: "V4",
-      department: "Quality",
-      branch: "Aerospace",
-      image: "https://via.placeholder.com/300",
-    },
-    {
-      id: 5,
-      name: "Charlie Green",
-      age: 29,
-      engine: "V6",
-      department: "Logistics",
-      branch: "Marine",
-      image: "https://via.placeholder.com/300",
-    },
-  ];
+  if (!religiousBooks) {
+    return <Loading />;
+  }
 
   return (
-    <div className=" mb-20 bg-[#f7f6f6] px-2 py-8">
-      <div className="flex text-2xl px-4 mb-10 justify-between items-center">
+    <div className=" mb-20 bg-[#f7f6f6] px-2 py-4">
+      <div className="flex px-4 items-center justify-between mb-8">
         <h2 className="text-xl lg:text-4xl font-semibold text-black">
-          Religious Book 📖
+          Religous Book
         </h2>
-        <Link to="/books">
-          <button className="btn rounded-3xl bg-[#F65D4E] text-white px-8">
-            View All
-          </button>
-        </Link>{" "}
+        <div className="border-t-2 border-gray-300 w-[25%] md:w-[60%] lg:w-[65%] mt-4"></div>
+        <div>
+          <Link to="/books">
+            <button className="btn rounded-3xl bg-[#F65D4E] text-white px-8">
+              View All
+            </button>
+          </Link>
+        </div>
       </div>
       <div className="slider-container px-4">
         <Slider {...settings}>
-          {fakeData.map((data) => (
-            <div key={data.id} className="p-2">
+          {religiousBooks.map((data) => (
+            <div key={data._id} className="p-2 h-[410px] ">
               <div className=" rounded-xl overflow-hidden shadow-lg h-full flex flex-col">
                 {/* Image Section */}
                 <img
-                  className="w-full h-48 object-contain p-4"
+                  className="w-full h-52 object-cover p-2"
                   src={data.image}
-                  alt={data.name}
+                  alt={data.title}
                 />
 
                 {/* Details Section */}
                 <div className="px-4 py-2 flex-grow">
-                  <div className="font-bold text-lg mb-1">{data.name}</div>
                   <p className="text-gray-600 text-sm">
-                    <strong>Age:</strong> {data.age}
+                    <strong>author:</strong> {data.author}
                   </p>
+                  <p className="font-bold text-xl mb-1">{data.title}</p>
+                  <div className="flex justify-between mb-2 mt-2 ">
+                    <p className="text-teal-500 text-sm">
+                      <strong>Price:</strong> {data.price}
+                    </p>
+                    <p className="text-gray-600 flex items-center gap-2 text-sm">
+                      <strong>reting:</strong>
+                      {data.rating} <FaStar className="text-orange-400" />
+                    </p>
+                  </div>
+
                   <p className="text-gray-600 text-sm">
-                    <strong>Engine:</strong> {data.engine}
-                  </p>
-                  <p className="text-gray-600 text-sm">
-                    <strong>Department:</strong> {data.department}
-                  </p>
-                  <p className="text-gray-600 text-sm">
-                    <strong>Branch:</strong> {data.branch}
+                    <strong>Category:</strong> {data.category}
                   </p>
                 </div>
 
                 {/* Button Section */}
                 <div className="px-4 pb-4">
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 w-full rounded">
+                  <button className="bg-teal-500 hover:bg-blue-700 text-white font-bold py-2 w-full rounded">
                     ADD TO CART
                   </button>
                 </div>
