@@ -2,19 +2,12 @@
 import { useEffect, useState } from "react";
 import BookCard from "./BookCard";
 import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
+import Loading from "../../components/sheard/Loading";
+import { IBook } from "../Home/PopularBooks";
 
-export interface Book {
-  _id: string;
-  title: string;
-  author: string;
-  price: number;
-  category: string;
-  image: string;
-  rating: number;
-  discount?: number; 
-}
+
 const Book = () => {
-  const [popularBooks, setPopularBooks] = useState<Book[]>([]);
+  const [popularBooks, setPopularBooks] = useState<IBook[]>([]);
   // console.log(popularBooks.length);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -42,12 +35,11 @@ const Book = () => {
   }, [searchTerm, selectedCategory, priceFilter]);
 
   const handleSearch = () => {
-    fetchBooks(); 
+    fetchBooks();
   };
 
-
   if (!popularBooks) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
@@ -79,11 +71,10 @@ const Book = () => {
             />
           </div>
           <button onClick={handleSearch} className="btn bg-teal-600 text-white">
-            {" "}
             Search
           </button>
           <select
-          defaultValue={"d"}
+            defaultValue={"d"}
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
             className="select select-bordered w-full max-w-xs"
@@ -94,24 +85,9 @@ const Book = () => {
             <option>Han Solo</option>
             <option>Greedo</option>
           </select>
-        </div>
-        {/* secound section */}
-        <div className=" w-full">
-          {/* <label className="form-control w-full ">
-            <h2 className=" textarea-xl mb-1"> Products Categories </h2>
-            <select  className="select w-full  ">
-              <option disabled selected>
-                Pick one
-              </option>
-              <option>Star Wars</option>
-              <option>Harry Potter</option>
-              <option>Lord of the Rings</option>
-              <option>Planet of the Apes</option>
-              <option>Star Trek</option>
-            </select>
-          </label> */}
 
-          <div className="flex justify-end mt-5">
+          {/* secound section */}
+          <div className=" w-full justify-end ">
             <select
               className="select select-bordered w-full max-w-xs"
               value={priceFilter}
@@ -127,6 +103,7 @@ const Book = () => {
             </select>
           </div>
         </div>
+
         <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4">
           {popularBooks.map((book) => (
             <BookCard key={book._id} book={book} />

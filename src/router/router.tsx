@@ -21,6 +21,7 @@ import ManageOrder from "../components/admin-route/ManageOrder";
 import Myorder from "../components/admin-route/user-route/Myorder";
 import Error from "../components/sheard/navbar/Error";
 import BlogDetails from "../page/bloge/BlogDetails";
+import Author from "../page/author/Author";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
           },
           
         ]
+      },
+      {
+        path:"author",
+        element:<Author/> 
       },
       {
         path:"books/ditales/:id",

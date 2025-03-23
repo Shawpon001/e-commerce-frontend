@@ -60,7 +60,7 @@ const Navbar = () => {
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
-    if (currentScrollY > 50) {
+    if (currentScrollY > 100) {
       setScrollDirection("down");
     } else {
       setScrollDirection("up");
@@ -75,12 +75,12 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="bg-gray-200 shadow-lg fixed top-0 z-50 w-full">
+    <header className="bg-gray-200 shadow-lg fixed  top-0 z-50 w-full">
       {/* SubNavbar with visibility based on scroll direction */}
       <div
         className={`${
           scrollDirection === "down" ? "hidden" : "block"
-        } transition-all duration-500`}
+        } transition-all duration-500 `}
       >
         <SubNavbar />
       </div>
@@ -206,6 +206,18 @@ const Navbar = () => {
                     </li>
                     <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
                       <NavLink
+                        to="/author"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-teal-600 font-serif uppercase nav-link font-semibold block text-[15px]"
+                            : "hover:text-[#ac99f1e1] text-gray-700 font-serif uppercase nav-link font-semibold block text-[15px]"
+                        }
+                      >
+                        Author
+                      </NavLink>
+                    </li>
+                    <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
+                      <NavLink
                         to="/about"
                         className={({ isActive }) =>
                           isActive
@@ -281,6 +293,18 @@ const Navbar = () => {
                     }
                   >
                     Books
+                  </NavLink>
+                </li>
+                <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
+                  <NavLink
+                    to="/author"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-teal-600 font-serif uppercase nav-link font-semibold block text-[15px]"
+                        : "hover:text-[#ac99f1e1] text-gray-700 font-serif uppercase nav-link font-semibold block text-[15px]"
+                    }
+                  >
+                    Author
                   </NavLink>
                 </li>
                 <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
