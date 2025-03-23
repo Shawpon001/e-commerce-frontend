@@ -73,20 +73,18 @@ const Book = () => {
             Search
           </button>
           <select
-            defaultValue={"d"}
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="select select-bordered w-full max-w-xs"
-          >
-            <option disabled selected>
-              Select Category
-            </option>
+  value={selectedCategory}
+  onChange={(e) => setSelectedCategory(e.target.value)}
+  className="select select-bordered w-full max-w-xs"
+>
+  <option value="" disabled>
+    Select Category
+  </option>
+  <option value="Fiction">Popular Book</option>
+  <option value="Religious">Religious Book</option>
+  <option value="Children">Child Book</option>
+</select>
 
-            <option>All Book</option>
-            <option value="Fiction">Popular Book</option>
-            <option value="Religious">Religous Book</option>
-            <option value="Children">Child Book</option>
-          </select>
 
           {/* secound section */}
           <div className=" w-full justify-end ">

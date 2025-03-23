@@ -22,7 +22,7 @@ const SubNavbar = () => {
         </p>
 
         <div>
-          <p className="flex">
+          <div className="flex">
             Follow us :
             <ul className="flex gap-2 textarea-xl ml-2">
               <li>
@@ -43,7 +43,7 @@ const SubNavbar = () => {
                 <FaTwitter />
               </li>
             </ul>
-          </p>
+          </div>
         </div>
       </div>
     </div>

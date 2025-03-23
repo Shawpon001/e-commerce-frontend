@@ -1,11 +1,14 @@
 const Contact = () => {
   return (
-    <div className="relative bg-[#f8ebeb8e]">
-      <div className="container mx-auto md:p-8 p-4">
-        <div className="text-center h-[170px] mb-14 border flex items-center justify-center">
-          <h2 className="text-4xl font-bold">CONTACT US</h2>
-        </div>
-
+    <div className="relative bg-gray-100">
+      <div className="w-full mb-16 ">
+        <img
+          src="https://i.ibb.co.com/ksbX08FH/5b76f375-edac-47b2-8a46-e48c74b8d088-1024.jpg"
+          className="bg-contain w-full h-[250px] "
+          alt=""
+        />
+      </div>
+      <div className="container mx-auto p-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
           <div>
             <h3 className="text-lg font-semibold mb-4">ONLINE INQUIRY</h3>

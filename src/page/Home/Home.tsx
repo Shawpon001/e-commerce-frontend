@@ -15,7 +15,7 @@ const Home = () => {
   const [religiousBooks, setReligiousBooks] = useState<IBook[]>([]);
   // console.log(religiousBooks)
   const [childrenBooks, setChildrenBooks] = useState<IBook[]>([]);
-  console.log(childrenBooks)
+  // console.log(childrenBooks)
   const [isLoading, setIsLoading] = useState(true);
   
   const axiosPublic = useAxiosPublic();
