@@ -58,7 +58,7 @@ const Registation = () => {
           {" "}
           <img src="https://i.ibb.co.com/4RL2PxQ/17133825331.jpg" alt="" />
         </div>
-        <div className=" bg-base-200 px-4 py-4 lg:max-w-3xl">
+        <div className="dark:bg-white dark:text-black bg-base-200 px-4 py-4 lg:max-w-3xl">
           <form onSubmit={handleRegister} className="mt-8     gap-6">
             <div className=" mb-2 ">
               <label

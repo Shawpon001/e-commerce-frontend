@@ -7,8 +7,8 @@ function Feedback() {
     AOS.init();
   }, []);
   return (
-    <div className="dark:bg-gray-700">
-      <section className="pb-12 mx-auto md:pb-20 max-w-7xl">
+    <div className="dark:bg-white ">
+      <section className="pb-8 mx-auto  max-w-7xl">
         <div className="py-4 text-center md:py-8">
           <h4 className="text-base font-bold tracking-wide text-center uppercase text-[#FC7E01]">
             Customer Reviews

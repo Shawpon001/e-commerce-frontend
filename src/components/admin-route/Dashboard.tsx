@@ -53,8 +53,8 @@ const Dashboard = () => {
           {/* Stats */}
           <div className="grid grid-cols-2 gap-4 col-span-1 md:col-span-2">
             {[
-              { title: "Total Book", value: "4006", change: "10.00%" },
-              { title: "Total User", value: "61344", change: "22.00%" },
+              { title: "Total Book", value: "35", change: "10.00%" },
+              { title: "Total User", value: "12", change: "22.00%" },
               { title: "Number of Meetings", value: "34040", change: "2.00%" },
               { title: "Number of Clients", value: "47033", change: "0.22%" },
             ].map((stat, i) => (
@@ -82,9 +82,12 @@ const Dashboard = () => {
         <section className="bg-white p-5 rounded-xl shadow">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold">User</h2>
-           <Link to="all-user"> <button className="text-sm text-blue-600 hover:underline">
-              View All
-            </button></Link>
+            <Link to="all-user">
+              {" "}
+              <button className="text-sm text-blue-600 hover:underline">
+                View All
+              </button>
+            </Link>
           </div>
           <AllUsers />
         </section>

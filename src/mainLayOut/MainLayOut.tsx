@@ -4,7 +4,7 @@ import Footer from "../components/sheard/footer/Footer.js";
 
 const MainLayOut = () => {
   return (
-    <div className='w-full 2xl:w-[1440px] 2xl:mx-auto overflow-x-hidden'>
+    <div className="w-full 2xl:w-[1440px] bg-gray-100 dark:text-black dark:bg-white 2xl:mx-auto overflow-x-hidden">
       <Navbar />
       <div className="pt-40">
         <Outlet />

@@ -26,7 +26,7 @@ const DashboardLayout = () => {
 
   return (
     <div>
-      <div className="drawer bg-[#f8f8f8] md:drawer-open">
+      <div className="drawer dark:text-black bg-[#f8f8f8] md:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col sm:items-start sm:justify-start my-2">
           {/* Page content here */}
@@ -50,17 +50,17 @@ const DashboardLayout = () => {
               </div>
             </div>
           </div>
-          <div className=" w-full mt-5 md:mt-2 ">
+          <div className=" dark:text-black w-full mt-5 md:mt-2 ">
             <Outlet />
           </div>
         </div>
-        <div className="drawer-side ">
+        <div className="drawer-side  ">
           <label
             htmlFor="my-drawer-2"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-52 bg-cyan-300  min-h-full  text-base-content">
+          <ul className="menu p-4 w-52 bg-cyan-300  min-h-full  ">
             {/* Sidebar content here */}
             <li>
               <Link className="flex justify-start gap-10" to={"/"}>

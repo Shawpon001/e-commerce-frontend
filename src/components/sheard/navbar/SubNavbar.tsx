@@ -1,7 +1,7 @@
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa6";
 const SubNavbar = () => {
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 ">
       {/* upper nav  */}
       <div className="hidden lg:flex flex-col items-center justify-between py-2 md:flex-row md:items-center md:justify-between text-sm mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
         <div>
