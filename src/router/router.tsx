@@ -22,6 +22,7 @@ import Myorder from "../components/admin-route/user-route/Myorder";
 import Error from "../components/sheard/navbar/Error";
 import BlogDetails from "../page/bloge/BlogDetails";
 import Author from "../page/author/Author";
+import Dashboard from "../components/admin-route/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -36,21 +37,20 @@ const router = createBrowserRouter([
       {
         path: "/books",
         element: <Book />,
-        children:[
+        children: [
           {
-            path:"books-main",
-            element:<Bloge/>
+            path: "books-main",
+            element: <Bloge />,
           },
-          
-        ]
+        ],
       },
       {
-        path:"author",
-        element:<Author/> 
+        path: "author",
+        element: <Author />,
       },
       {
-        path:"books/ditales/:id",
-        element:<BookDetails/> 
+        path: "books/ditales/:id",
+        element: <BookDetails />,
       },
       {
         path: "/about",
@@ -70,15 +70,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <PrivateRoute>  <Cart /></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <Cart />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/payment/success/:tranId",
-        element: <PaymentSuccess/>,
+        element: <PaymentSuccess />,
       },
       {
         path: "/payment/fail/:tranId",
-        element: <PaymentFailed/>,
+        element: <PaymentFailed />,
       },
       // login routes
       {
@@ -93,36 +97,42 @@ const router = createBrowserRouter([
   },
   {
     path: "/deshboard",
-    element: <PrivateRoute><DashboardLayout /></PrivateRoute> ,
-    children:[
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
       {
-        path:"all-user",
-        element:<AllUsers/>
+        path: "",
+        element: <Dashboard />,
       },
       {
-        path:"add-book",
-        element:<AddBooks/>
+        path: "all-user",
+        element: <AllUsers />,
       },
       {
-        path:"profile",
-        element:<Profile/>
+        path: "add-book",
+        element: <AddBooks />,
       },
       {
-        path:"manage-Books",
-        element:<ManageBook/>
+        path: "profile",
+        element: <Profile />,
       },
       {
-        path:"manage-order",
-        element:<ManageOrder/>
+        path: "manage-Books",
+        element: <ManageBook />,
+      },
+      {
+        path: "manage-order",
+        element: <ManageOrder />,
       },
       // users
       {
-        path:"order",
-        element:<Myorder/>
-      }
-    
-    
-    ]
+        path: "order",
+        element: <Myorder />,
+      },
+    ],
   },
 ]);
 

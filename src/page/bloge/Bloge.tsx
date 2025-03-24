@@ -67,7 +67,7 @@ const Bloge = () => {
         {blogs?.map((blog) => (
           <div
             key={blog.id}
-            className="max-w-full lg:h-[520px] h-[550px] border border-gray-600 rounded overflow-hidden shadow-lg"
+            className="max-w-full lg:h-[540px] h-[550px] border border-gray-600 rounded overflow-hidden shadow-lg"
           >
             <img
               className="p-2 w-full h-[320px] object-cover"

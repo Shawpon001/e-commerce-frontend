@@ -1,4 +1,4 @@
-import {  useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
@@ -10,7 +10,7 @@ const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
     Swal.fire({
       title: "Please login!",
       icon: "warning",
-      confirmButtonText: "login",
+      confirmButtonText: "login Now",
     }).then(() => {
         navigate("/login")
     });

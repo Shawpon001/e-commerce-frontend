@@ -11,12 +11,14 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 const DashboardLayout = () => {
   const token = localStorage.getItem("jwtToken");
   let isAdmin = false;
+  let isUsers = false;
 
   if (token) {
     try {
       // Decode token or fetch user role from your API
       const user = JSON.parse(atob(token.split(".")[1]));
       isAdmin = user?.role === "admin";
+      isUsers = user?.role === "user";
     } catch (error) {
       console.error("Invalid token:", error);
     }
@@ -50,7 +52,6 @@ const DashboardLayout = () => {
           </div>
           <div className=" w-full mt-5 md:mt-2 ">
             <Outlet />
-            
           </div>
         </div>
         <div className="drawer-side ">
@@ -71,6 +72,13 @@ const DashboardLayout = () => {
               </Link>
             </li>
             <hr className="mb-2 mt-1" />
+            {isAdmin && (
+              <li className="mt-4">
+                <Link to="/deshboard">
+                  <FaBagShopping /> Dashboard
+                </Link>
+              </li>
+            )}
             {isAdmin && (
               <li>
                 <Link to={"all-user"}>
@@ -102,17 +110,21 @@ const DashboardLayout = () => {
                 </Link>
               </li>
             )}
-            <li className="mt-4">
-              <Link to="order">
-                <FaBagShopping /> My Order
-              </Link>
-            </li>
-            <li>
-              <Link to="manage-order">
-                <FaBagShopping />
-                WishList
-              </Link>
-            </li>
+            {isUsers && (
+              <li>
+                <Link to="order">
+                  <FaBagShopping /> My Order
+                </Link>
+              </li>
+            )}
+            {isUsers && (
+              <li>
+                <Link to="manage-order">
+                  <FaBagShopping />
+                  WishList
+                </Link>
+              </li>
+            )}
 
             <li className="mt-10">
               <hr />
