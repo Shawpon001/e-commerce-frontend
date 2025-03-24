@@ -10,6 +10,7 @@ const Author = () => {
   const [popularBooks, setPopularBooks] = useState<IBook[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
   const authorsPerPage = 20;
 
   const axiosPublic = useAxiosPublic();
@@ -38,16 +39,23 @@ const Author = () => {
     return <Loading />;
   }
 
+  // Filter authors by search input (first letter match, case-insensitive)
+  const filteredAuthors = popularBooks.filter((author) =>
+    author.author
+      ?.toLowerCase()
+      .startsWith(searchTerm.trim().toLowerCase())
+  );
+
   // Pagination section
-  const totalPages = Math.ceil(popularBooks.length / authorsPerPage);
+  const totalPages = Math.ceil(filteredAuthors.length / authorsPerPage);
   const startIndex = (currentPage - 1) * authorsPerPage;
-  const currentAuthors = popularBooks.slice(
+  const currentAuthors = filteredAuthors.slice(
     startIndex,
     startIndex + authorsPerPage
   );
 
   return (
-    <div className="">
+    <div>
       {/* banner */}
       <div className="w-full">
         <div
@@ -74,48 +82,68 @@ const Author = () => {
           authors' narratives form the heart of our dynamic literary universe."
         </p>
 
-        <div>
-          <hr className="mb-10" />
+        <div className="mb-10">
+          <hr />
+          <div className="text-center items-center p-1.5 ">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1); // reset to page 1 when searching
+              }}
+              className="p-1 px-2 rounded-2xl"
+              placeholder="Search author by first letter"
+            />
+          </div>
           <hr />
         </div>
 
         {/* Authors Grid */}
         <div className="grid grid-cols-1 py-10 md:grid-cols-4 gap-2">
-          {currentAuthors.map((author, index) => (
-            <div
-              data-aos="fade-up"
-              data-aos-duration="3000"
-              key={index}
-              className="p-2 border flex flex-col items-center rounded-lg shadow-md transition-all cursor-pointer"
-            >
-              <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white shadow-md">
-                <span className="text-2xl">
-                  <FaPencil />
-                </span>
+          {currentAuthors.length > 0 ? (
+            currentAuthors.map((author, index) => (
+              <div
+                data-aos="fade-up"
+                data-aos-duration="3000"
+                key={index}
+                className="p-2 border flex flex-col items-center rounded-lg shadow-md transition-all cursor-pointer"
+              >
+                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white shadow-md">
+                  <span className="text-2xl">
+                    <FaPencil />
+                  </span>
+                </div>
+                <p className="mt-4 font-bold text-gray-800 text-xl">
+                  {author.author}
+                </p>
               </div>
-              <p className="mt-4 font-bold text-gray-800 text-xl">
-                {author.author}
-              </p>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className="text-center col-span-4 text-red-500 font-semibold">
+              No authors found.
+            </p>
+          )}
         </div>
 
         {/* Pagination */}
-        <div className="flex justify-center mt-8 space-x-2">
-          {[...Array(totalPages)].map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentPage(idx + 1)}
-              className={`px-4 py-2 rounded ${
-                currentPage === idx + 1
-                  ? "bg-cyan-600 text-white"
-                  : "bg-gray-200 text-black"
-              }`}
-            >
-              {idx + 1}
-            </button>
-          ))}
-        </div>
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-8 space-x-2">
+            {[...Array(totalPages)].map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentPage(idx + 1)}
+                className={`px-4 py-2 rounded ${
+                  currentPage === idx + 1
+                    ? "bg-cyan-600 text-white"
+                    : "bg-gray-200 text-black"
+                }`}
+              >
+                {idx + 1}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

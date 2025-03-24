@@ -12,6 +12,8 @@ import Loading from "../../components/sheard/Loading";
 
 const Home = () => {
 
+  const [popularBooks, setPopularBooks] = useState<IBook[]>([]);
+  // console.log(popularBooks,"data get popouer")
   const [religiousBooks, setReligiousBooks] = useState<IBook[]>([]);
   // console.log(religiousBooks)
   const [childrenBooks, setChildrenBooks] = useState<IBook[]>([]);
@@ -26,9 +28,10 @@ const Home = () => {
         const response = await axiosPublic.get(`/products/get-book`);
         const allBooks = response.data.data || [];
   
+        const populer = allBooks.filter((book: IBook) => book.category === 'Fiction');
         const religious = allBooks.filter((book: IBook) => book.category === 'Religious');
         const children = allBooks.filter((book: IBook) => book.category === 'Children');
-  
+        setPopularBooks(populer)   
         setReligiousBooks(religious);
         setChildrenBooks(children);
       } catch (error) {
@@ -51,7 +54,7 @@ const Home = () => {
       <div className="px-4">
         <Banner />
         <BookCatagory />
-        <PopularBooks />
+        <PopularBooks popularBooks={popularBooks} />
         <RelizonBook religiousBooks={religiousBooks} />
         <ChildBook  religiousBooks={childrenBooks} />
         <Discount />

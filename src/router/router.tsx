@@ -23,6 +23,7 @@ import Error from "../components/sheard/navbar/Error";
 import BlogDetails from "../page/bloge/BlogDetails";
 import Author from "../page/author/Author";
 import Dashboard from "../components/admin-route/Dashboard";
+import UserDashboard from "../components/admin-route/user-route/UserDashboard";
 
 const router = createBrowserRouter([
   {
@@ -106,6 +107,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Dashboard />,
+      },
+      {
+        path: "",
+        element: <UserDashboard />,
       },
       {
         path: "all-user",

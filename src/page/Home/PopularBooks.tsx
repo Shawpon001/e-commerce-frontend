@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, } from "react";
 import { FaDollarSign, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
+// import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Loading from "../../components/sheard/Loading";
@@ -15,32 +15,13 @@ export interface IBook {
   rating: number;
 }
 
-const PopularBooks = () => {
+const PopularBooks = ({popularBooks}:{popularBooks:IBook[]}) => {
+  console.log(popularBooks,"popuser page")
   useEffect(() => {
     AOS.init();
   }, []);
 
-  const [popularBooks, setPopularBooks] = useState<IBook[]>([]);
-  // console.log(popularBooks);
-  const [isLoading, setIsLoading] = useState(true);
-  const axiosPublic = useAxiosPublic();
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axiosPublic.get(`/products/get-book`);
-        const first8Books = response.data.data.slice(0, 8);
-        setPopularBooks(first8Books || []);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [axiosPublic]);
-
-  if (isLoading) {
+  if (!popularBooks) {
     return <Loading />;
   }
 
