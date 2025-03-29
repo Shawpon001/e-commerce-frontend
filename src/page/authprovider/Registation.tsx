@@ -1,3 +1,4 @@
+"use client";
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../axiosPublic/useAxiosPublic";
 import Swal from "sweetalert2";
@@ -6,51 +7,53 @@ const Registation = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
-    const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const form = e.target as HTMLFormElement;
-      const name = form.name.valueOf;
-      const email = form.email.value;
-      const password = form.password.value;
-    
-      const data = { name, email, password };
-      console.log(data);
-    
-      try {
-        // Send the registration data
-        const response = await axiosPublic.post("/auth/register", data);
-        console.log(response);
-    
-        // navigate("/login")
-        if (response.data) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Registration Successful",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/login")
-        } else {
-          Swal.fire({
-            position: "top-end",
-            icon: "error",
-            title: "Registration Failed",
-            showConfirmButton: true,
-          });
-        }
-      } catch (err) {
-        console.error("Registration error:", err);
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    const name =
+      (form.elements.namedItem("name") as HTMLInputElement)?.value || "";
+    const email =
+      (form.elements.namedItem("email") as HTMLInputElement)?.value || "";
+    const password =
+      (form.elements.namedItem("password") as HTMLInputElement)?.value || "";
+
+    const data = { name, email, password };
+    console.log(data);
+
+    try {
+      const response = await axiosPublic.post("/auth/register", data);
+      console.log(response, "response");
+
+      if (response.data) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Registration Successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/login");
+      } else {
         Swal.fire({
           position: "top-end",
           icon: "error",
           title: "Registration Failed",
-          text: "An error occurred during registration.",
           showConfirmButton: true,
         });
       }
-    };
-    
+    } catch (err) {
+      console.error("Registration error:", err);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Registration Failed",
+        text: "An error occurred during registration.",
+        showConfirmButton: true,
+      });
+    }
+  };
+
   return (
     <div className=" mt-8 lg:px-14 px-5">
       <div className=" md:flex items-center  justify-center">
@@ -62,14 +65,14 @@ const Registation = () => {
           <form onSubmit={handleRegister} className="mt-8     gap-6">
             <div className=" mb-2 ">
               <label
-                htmlFor="name"
+                htmlFor="text"
                 className="block text-sm font-medium text-gray-700"
               >
                 Name
               </label>
 
               <input
-                type="name"
+                type="text"
                 id="name"
                 name="name"
                 required

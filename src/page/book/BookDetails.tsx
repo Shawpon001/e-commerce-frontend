@@ -96,7 +96,7 @@ const BookDetails = () => {
 
   return (
     <div className="w-full mt-10 px-5 md:px-10 lg:px-14">
-      <div className="bg-base-200 shadow-lg p-5 md:p-8 rounded-lg">
+      <div className="bg-base-200  dark:bg-white dark:text-black shadow-lg p-5 md:p-8 rounded-lg">
         <div className="flex flex-col lg:flex-row gap-10 items-center lg:items-start">
           {/* Product Image */}
           <div className="w-full lg:w-1/2 flex flex-col items-center">
@@ -118,7 +118,7 @@ const BookDetails = () => {
           </div>
 
           {/* Product Details */}
-          <div className="w-full lg:w-1/2 space-y-5 text-center lg:text-left">
+          <div className="w-full  lg:w-1/2 space-y-5 text-center lg:text-left">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
               {book.title}
             </h1>
